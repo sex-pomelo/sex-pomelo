@@ -1,6 +1,6 @@
 {
   "name": "@sex-pomelo/sex-pomelo",
-  "version": "2.2.5",
+  "version": "2.2.6",
   "homepage": "https://github.com/NetEase/pomelo",
   "repository": {
     "type": "git",
@@ -12,10 +12,12 @@
   "bugs": {
     "url": "https://github.com/sex-pomelo/sex-pomelo/issues"
   },
-  "licenses": [{
-    "type": "MIT",
-    "url": "https://github.com/NetEase/pomelo#license"
-  }],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/NetEase/pomelo#license"
+    }
+  ],
   "keywords": [
     "pomelo",
     "framework",
@@ -31,16 +33,16 @@
     "cliff": "0.1.10",
     "mkdirp": "0.3.3",
     "pomelo-loader": "0.0.6",
-    "pomelo-rpc": "1.0.7",
+    "@sex-pomelo/sex-pomelo-rpc": "1.0.7",
     "pomelo-protocol": "0.1.6",
-    "pomelo-admin": "1.0.0",
+    "@sex-pomelo/sex-pomelo-admin": "1.0.0",
     "pomelo-logger": "0.1.7",
     "pomelo-scheduler": "0.3.9",
     "ws": "1.1.5",
     "pomelo-protobuf": "0.4.0",
     "node-bignumber": "1.2.1",
     "commander": "2.0.0",
-    "mqtt": "0.3.13"
+    "mqtt": "2.18.8"
   },
   "bin": {
     "pomelo": "./bin/pomelo"
