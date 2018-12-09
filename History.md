@@ -1,3 +1,6 @@
+2.2.7 / 2018-12-09
+=================
+  * use sex-pomelo-protocol(0.1.7) replace pomelo-protocol
 
 2.2.6 / 2018-11-15
 =================
