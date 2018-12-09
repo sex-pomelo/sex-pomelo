@@ -1,3 +1,10 @@
+
+2.2.6 / 2018-11-15
+=================
+  * mqtt update to 2.18.8
+  * 使用 sex-pomelo-admin 替换 pomelo-admin ( mqtt-connection update to 4.0.0)
+  * 使用 sex-pomelo-rpc 替换 pomelo-rpc ( mqtt-connection update to 4.0.0)
+
 2.2.5 / 2017-1-22
 =================
   * [#815](https://github.com/NetEase/pomelo/pull/815)
