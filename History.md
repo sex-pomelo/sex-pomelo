@@ -1,7 +1,7 @@
 2.2.7 / 2018-12-09
 =================
   * Suggest use **nodejs > 8.x**,maybe can use 4.x,6.x;
-  * use sex-pomelo-protocol(0.1.7) replace pomelo-protocol
+  * use sex-pomelo-protocol(0.1.7) replace pomelo-protocol( message,package encode/decode performance was doubled)
 
 2.2.6 / 2018-11-15
 =================
