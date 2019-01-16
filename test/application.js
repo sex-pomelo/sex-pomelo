@@ -81,6 +81,7 @@ describe('application test', function(){
         should.not.exist(err);
       });
 
+      this.timeout(WAIT_TIME * 10);
       setTimeout(function() {
         // wait for after start
         app.stop(false);
@@ -548,6 +549,7 @@ describe('application test', function(){
         should.not.exist(err);
       });
 
+      this.timeout(WAIT_TIME* 10);
       setTimeout(function() {
         // wait for after start
         app.stop(false);
