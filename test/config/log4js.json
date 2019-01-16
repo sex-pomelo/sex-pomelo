@@ -1,84 +1,89 @@
 {
-  "appenders": [
-    {
+  "appenders":{
+    "console":{ "type":"console"},
+    "con-log":{
+        "type": "file",
+        "filename": "${opts:base}/logs/con-log-${opts:serverId}.log",
+        "maxLogSize": 1048576,
+        "layout": {"type": "basic"},
+        "backups": 5
+    },
+    "rpc-log":{
+        "type": "file",
+        "filename": "${opts:base}/logs/rpc-log-${opts:serverId}.log",
+        "maxLogSize": 1048576,
+        "layout": { "type": "basic"},
+        "backups": 5
+    },
+    "forward-log":{
+        "type": "file",
+        "filename": "${opts:base}/logs/forward-log-${opts:serverId}.log",
+        "maxLogSize": 1048576,
+        "layout": {"type": "basic"},
+        "backups": 5
+    },
+    "rpc-debug":{
+        "type": "file",
+        "filename": "${opts:base}/logs/rpc-debug-${opts:serverId}.log",
+        "maxLogSize": 1048576,
+        "layout": {"type": "basic"},
+        "backups": 5
+    },
+    "crash-log":{
       "type": "file",
-      "filename": "./test/logs/node-log-${opts:serverId}.log",
-      "fileSize": 1048576,
-      "layout": {
-        "type": "basic"
-      },
+      "filename": "${opts:base}/logs/crash.log",
+      "maxLogSize": 1048576,
+      "layout": {"type": "basic"},
       "backups": 5
     },
-    {
-      "type": "console"
-    },
-    {
+    "admin-log":{
       "type": "file",
-      "filename": "./test/logs/con-log-${opts:serverId}.log",
-      "pattern": "connector",
+      "filename": "${opts:base}/logs/admin.log",
       "maxLogSize": 1048576,
-      "layout": {
-        "type": "basic"
-      },
-      "backups": 5,
-      "category":"con-log"
+      "layout": {"type": "basic"}
+      ,"backups": 5
     },
-    {
+    "pomelo":{
       "type": "file",
-      "filename": "./test/logs/rpc-log-${opts:serverId}.log",
-      "fileSize": 1048576,
-      "layout": {
-        "type": "basic"
-      },
-      "backups": 5,
-      "category":"rpc-log"
+      "filename": "${opts:base}/logs/pomelo.log",
+      "maxLogSize": 1048576,
+      "layout": {"type": "basic"},
+      "backups": 5
     },
-    {
+    "pomelo-admin":{
       "type": "file",
-      "filename": "./test/logs/forward-log-${opts:serverId}.log",
-      "fileSize": 1048576,
-      "layout": {
-        "type": "basic"
-      },
-      "backups": 5,
-      "category":"forward-log"
+      "filename": "${opts:base}/logs/pomelo-admin.log",
+      "maxLogSize": 1048576,
+      "layout": {"type": "basic"},
+      "backups": 5
     },
-    {
+    "pomelo-rpc":{
       "type": "file",
-      "filename": "./test/logs/crash.log",
-      "fileSize": 1048576,
-      "layout": {
-        "type": "basic"
-      },
-      "backups": 5,
-      "category":"crash-log"
+      "filename": "${opts:base}/logs/pomelo-rpc.log",
+      "maxLogSize": 1048576,
+      "layout": {"type": "basic"},
+      "backups": 5
     },
-    {
+    "comm-log":{
       "type": "file",
-      "filename": "./test/logs/transaction.log",
-      "fileSize": 1048576,
-      "layout": {
-        "type": "basic"
-      },
-      "backups": 5,
-      "category":"transaction-log"
-    },
-    {
-      "type": "file",
-      "filename": "./test/logs/transaction-error.log",
-      "fileSize": 1048576,
-      "layout": {
-        "type": "basic"
-      },
-      "backups": 5,
-      "category":"transaction-error-log"
+      "filename": "${opts:base}/logs/${opts:serverId}.log",
+      "maxLogSize": 6048576,
+      "layout": {"type": "basic"},
+      "backups": 5
     }
-  ],
-
-  "levels": {
-    "rpc-log" : "ERROR",
-    "forward-log": "ERROR"
   },
-
-  "replaceConsole": true
+  "categories": {
+      "con-log": { "appenders": ["con-log"], "level":"info" },
+      "rpc-log": { "appenders": ["rpc-log"], "level":"info" },
+      "forward-log": { "appenders": ["forward-log"], "level":"info" },
+      "rpc-debug": { "appenders": ["rpc-debug"], "level":"info" },
+      "crash-log": { "appenders": ["crash-log"], "level":"info" },
+      "admin-log": { "appenders": ["admin-log"], "level":"info" },
+      "pomelo": { "appenders": ["pomelo"], "level":"info" },
+      "pomelo-admin": { "appenders": ["pomelo-admin"], "level":"info" },
+      "pomelo-rpc": { "appenders": ["pomelo-rpc"], "level":"info" },
+      "default": { "appenders": ["comm-log"], "level":"info" }
+  },
+  "lineDebug": false,
+  "reloadSecs":10
 }

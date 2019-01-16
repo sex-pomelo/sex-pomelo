@@ -1,9 +1,9 @@
-var pomelo = require('pomelo');
+const pomelo = require('pomelo');
 
 /**
  * Init app for client.
  */
-var app = pomelo.createApp();
+let app = pomelo.createApp();
 app.set('name', '$');
 
 // app configuration
