@@ -16,6 +16,8 @@ Suggest node ver >= 8.x ( not 8.12.0)
  * Issues: <https://github.com/NetEase/pomelo/issues/>
  * Tags: game, nodejs
 
+## Install
+$ npm install -g @sex-pomelo/sex-pomelo
 
 ## Features
 
