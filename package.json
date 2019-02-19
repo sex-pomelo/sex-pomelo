@@ -1,6 +1,6 @@
 {
   "name": "@sex-pomelo/sex-pomelo",
-  "version": "2.3.0-0",
+  "version": "2.3.0-1",
   "homepage": "https://github.com/sex-pomelo/sex-pomelo",
   "repository": {
     "type": "git",
@@ -44,8 +44,7 @@
     "commander": "2.0.0",
     "mqtt": "2.18.8",
     "ioredis": "^4.5.0",
-    "uuid": "^3.3.2",
-    "redis": "0.12.1"
+    "uuid": "^3.3.2"
   },
   "bin": {
     "pomelo": "./bin/pomelo"
