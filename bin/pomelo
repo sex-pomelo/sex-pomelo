@@ -594,8 +594,10 @@ function terminal(signal, opts) {
           if( signal === 'stop' ){
             let checkCnt = 0;
             let bExits = [];
+            let wastTime = 0;
             while(1){
               await sex_timeout( 2000 );
+              console.log(`wait stop ... [${checkCnt}]s`);
               bExits = await client.mget( retKeys );
               let allExit = true;
               let retKeysTmp = [];
@@ -613,7 +615,7 @@ function terminal(signal, opts) {
               }
 
               checkCnt += 2;
-              if(checkCnt >= 60){
+              if(checkCnt >= 90){
                 break;
               }
             }
