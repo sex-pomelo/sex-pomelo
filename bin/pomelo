@@ -602,8 +602,8 @@ function terminal(signal, opts) {
               for( let i=0;i<bExits.length; i++ ){
                   if( bExits[i] !== null){
                       allExit = false;
+                      retKeysTmp.push(retKeys[i]);
                   }else{
-                    retKeysTmp.push(retKeys[i]);
                     console.log(`i ${retKeys[i]} now stop ok.`);
                   }
               }
