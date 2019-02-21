@@ -3,45 +3,45 @@
 /**
  * Module dependencies.
  */
-var fs = require('fs'),
-  os = require('os'),
-  path = require('path'),
-  util = require('util'),
-  cliff = require('cliff'),
-  mkdirp = require('mkdirp'),
-  utils = require('../lib/util/utils'),
-  starter = require('../lib/util/starter'),
-  exec = require('child_process').exec,
-  version = require('../package.json').version,
-  constants = require('../lib/util/constants'),
-  program = require('commander');
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
+const util = require('util');
+const cliff = require('cliff');
+const mkdirp = require('mkdirp');
+const utils = require('../lib/util/utils');
+const starter = require('../lib/util/starter');
+const exec = require('child_process').exec;
+const version = require('../package.json').version;
+const constants = require('../lib/util/constants');
+const program = require('commander');
 
-  const redis=require('ioredis');
+const redis=require('ioredis');
 
 /**
  *  Constant Variables
  */
-var TIME_INIT = 1 * 1000;
-var TIME_KILL_WAIT = 5 * 1000;
-var KILL_CMD_LUX = 'kill -9 `ps -ef|grep node|awk \'{print $2}\'`';
-var KILL_CMD_WIN = 'taskkill /im node.exe /f';
+let TIME_INIT = 1 * 1000;
+let TIME_KILL_WAIT = 5 * 1000;
+let KILL_CMD_LUX = 'kill -9 `ps -ef|grep node|awk \'{print $2}\'`';
+let KILL_CMD_WIN = 'taskkill /im node.exe /f';
 
-var CUR_DIR = process.cwd();
-var DEFAULT_GAME_SERVER_DIR = CUR_DIR;
-var DEFAULT_REDIS_PRE = 'pomelo';
-var DEFAULT_PWD = 'admin';
-var DEFAULT_ENV = 'development';
-var DEFAULT_MASTER_HOST = '192.168.2.12';
-var DEFAULT_MASTER_PORT = 6379;
+let CUR_DIR = process.cwd();
+let DEFAULT_GAME_SERVER_DIR = CUR_DIR;
+let DEFAULT_REDIS_PRE = 'pomelo';
+let DEFAULT_PWD = 'admin';
+let DEFAULT_ENV = 'development';
+let DEFAULT_MASTER_HOST = '192.168.2.12';
+let DEFAULT_MASTER_PORT = 6379;
 
-var CONNECT_ERROR = 'Fail to connect to admin console server.';
-var FILEREAD_ERROR = 'Fail to read the file, please check if the application is started legally.';
-var CLOSEAPP_INFO = 'Closing the application......\nPlease wait......';
-var ADD_SERVER_INFO = 'Successfully add server.';
-var INIT_PROJ_NOTICE = '\nThe default admin user is: \n\n'+ '  username'.green + ': admin\n  ' + 'password'.green+ ': admin\n\nYou can configure admin users by editing adminUser.json later.\n ';
-var SCRIPT_NOT_FOUND = 'Fail to find an appropriate script to run,\nplease check the current work directory or the directory specified by option `--directory`.\n'.red;
-var COMMAND_ERROR = 'Illegal command format. Use `pomelo --help` to get more info.\n'.red;
-var DAEMON_INFO = 'The application is running in the background now.\n';
+let CONNECT_ERROR = 'Fail to connect to admin console server.';
+let FILEREAD_ERROR = 'Fail to read the file, please check if the application is started legally.';
+let CLOSEAPP_INFO = 'Closing the application......\nPlease wait......';
+let ADD_SERVER_INFO = 'Successfully add server.';
+let INIT_PROJ_NOTICE = '\nThe default admin user is: \n\n'+ '  username'.green + ': admin\n  ' + 'password'.green+ ': admin\n\nYou can configure admin users by editing adminUser.json later.\n ';
+let SCRIPT_NOT_FOUND = 'Fail to find an appropriate script to run,\nplease check the current work directory or the directory specified by option `--directory`.\n'.red;
+let COMMAND_ERROR = 'Illegal command format. Use `pomelo --help` to get more info.\n'.red;
+let DAEMON_INFO = 'The application is running in the background now.\n';
 
 program.version(version);
 
@@ -77,11 +77,9 @@ program.command('add')
   .description('add a new server')
   .option('-e, --env <env>', 'the used environment', DEFAULT_ENV)
   .option('-d, --directory, <directory>', 'the code directory', DEFAULT_GAME_SERVER_DIR)
-  .option('-h, --host <master-host>', 'master server host', DEFAULT_MASTER_HOST)
-  .option('-P, --port <master-port>', 'master server port', DEFAULT_MASTER_PORT)
   .action(function() {
-    var args = [].slice.call(arguments, 0);
-    var opts = args[args.length - 1];
+    let args = [].slice.call(arguments, 0);
+    let opts = args[args.length - 1];
     opts.args = args.slice(0, -1);
     add(opts);
   });
@@ -94,8 +92,8 @@ program.command('stop')
   .option('-h, --host <master-host>', 'master server host', DEFAULT_MASTER_HOST)
   .option('-P, --port <master-port>', 'master server port', DEFAULT_MASTER_PORT)
   .action(function() {
-    var args = [].slice.call(arguments, 0);
-    var opts = args[args.length - 1];
+    let args = [].slice.call(arguments, 0);
+    let opts = args[args.length - 1];
     opts.serverIds = args.slice(0, -1);
     terminal('stop', opts);
   });
@@ -109,8 +107,8 @@ program.command('kill')
   .option('-P, --port <master-port>', 'master server port', DEFAULT_MASTER_PORT)
   .option('-f, --force', 'using this option would kill all the node processes')
   .action(function() {
-    var args = [].slice.call(arguments, 0);
-    var opts = args[args.length - 1];
+    let args = [].slice.call(arguments, 0);
+    let opts = args[args.length - 1];
     opts.serverIds = args.slice(0, -1);
     terminal('kill', opts);
   });
@@ -155,16 +153,16 @@ function init(path) {
  * @param {String} ph
  */
 function createApplicationAt(ph, type) {
-  var name = path.basename(path.resolve(CUR_DIR, ph));
+  let name = path.basename(path.resolve(CUR_DIR, ph));
   copy(path.join(__dirname, '../template/'), ph);
   mkdir(path.join(ph, 'game-server/logs'));
   mkdir(path.join(ph, 'shared'));
   // rmdir -r
-  var rmdir = function(dir) {
-    var list = fs.readdirSync(dir);
-    for(var i = 0; i < list.length; i++) {
-      var filename = path.join(dir, list[i]);
-      var stat = fs.statSync(filename);
+  let rmdir = function(dir) {
+    let list = fs.readdirSync(dir);
+    for(let i = 0; i < list.length; i++) {
+      let filename = path.join(dir, list[i]);
+      let stat = fs.statSync(filename);
       if(filename === "." || filename === "..") {
       } else if(stat.isDirectory()) {
         rmdir(filename);
@@ -176,9 +174,9 @@ function createApplicationAt(ph, type) {
   };
   setTimeout(function() {
     switch(type) {
-      case '1':
+      case '1':{
          // use websocket
-         var unlinkFiles = ['game-server/app.js.sio',
+         let unlinkFiles = ['game-server/app.js.sio',
          'game-server/app.js.wss',
          'game-server/app.js.mqtt',
          'game-server/app.js.sio.wss',
@@ -189,13 +187,13 @@ function createApplicationAt(ph, type) {
          'web-server/public/js/lib/pomeloclient.js.wss',
          'web-server/public/js/lib/build/build.js.wss',
          'web-server/public/js/lib/socket.io.js'];
-         for(var i = 0; i < unlinkFiles.length; ++i) {
+         for(let i = 0; i < unlinkFiles.length; ++i) {
             fs.unlinkSync(path.resolve(ph, unlinkFiles[i]));
          }
-        break;
-        case '2':
+        }break;
+        case '2':{
           // use socket.io
-          var unlinkFiles = ['game-server/app.js',
+          let unlinkFiles = ['game-server/app.js',
           'game-server/app.js.wss',
           'game-server/app.js.udp',
           'game-server/app.js.mqtt',
@@ -204,7 +202,7 @@ function createApplicationAt(ph, type) {
           'web-server/public/index.html',
           'web-server/public/js/lib/component.json',
           'web-server/public/js/lib/pomeloclient.js.wss'];
-          for(var i = 0; i < unlinkFiles.length; ++i) {
+          for(let i = 0; i < unlinkFiles.length; ++i) {
             fs.unlinkSync(path.resolve(ph, unlinkFiles[i]));
           }
 
@@ -213,10 +211,10 @@ function createApplicationAt(ph, type) {
 
           rmdir(path.resolve(ph, 'web-server/public/js/lib/build'));
           rmdir(path.resolve(ph, 'web-server/public/js/lib/local'));
-          break;
-        case '3':
+        }break;
+        case '3':{
           // use websocket wss
-          var unlinkFiles = ['game-server/app.js.sio',
+          let unlinkFiles = ['game-server/app.js.sio',
           'game-server/app.js',
           'game-server/app.js.udp',
           'game-server/app.js.sio.wss',
@@ -227,17 +225,17 @@ function createApplicationAt(ph, type) {
           'web-server/public/js/lib/pomeloclient.js.wss',
           'web-server/public/js/lib/build/build.js',
           'web-server/public/js/lib/socket.io.js'];
-          for(var i = 0; i < unlinkFiles.length; ++i) {
+          for(let i = 0; i < unlinkFiles.length; ++i) {
             fs.unlinkSync(path.resolve(ph, unlinkFiles[i]));
           }
 
           fs.renameSync(path.resolve(ph, 'game-server/app.js.wss'), path.resolve(ph, 'game-server/app.js'));
           fs.renameSync(path.resolve(ph, 'web-server/app.js.https'), path.resolve(ph, 'web-server/app.js'));
           fs.renameSync(path.resolve(ph, 'web-server/public/js/lib/build/build.js.wss'), path.resolve(ph, 'web-server/public/js/lib/build/build.js'));
-          break;
-        case '4':
+        }break;
+        case '4':{
           // use socket.io wss
-           var unlinkFiles = ['game-server/app.js.sio',
+           let unlinkFiles = ['game-server/app.js.sio',
           'game-server/app.js',
           'game-server/app.js.udp',
           'game-server/app.js.wss',
@@ -245,7 +243,7 @@ function createApplicationAt(ph, type) {
           'web-server/app.js',
           'web-server/public/index.html',
           'web-server/public/js/lib/pomeloclient.js'];
-          for(var i = 0; i < unlinkFiles.length; ++i) {
+          for(let i = 0; i < unlinkFiles.length; ++i) {
             fs.unlinkSync(path.resolve(ph, unlinkFiles[i]));
           }
 
@@ -257,10 +255,10 @@ function createApplicationAt(ph, type) {
           rmdir(path.resolve(ph, 'web-server/public/js/lib/build'));
           rmdir(path.resolve(ph, 'web-server/public/js/lib/local'));
           fs.unlinkSync(path.resolve(ph, 'web-server/public/js/lib/component.json'));
-          break;
-        case '5':
+        }break;
+        case '5':{
           // use socket.io wss
-           var unlinkFiles = ['game-server/app.js.sio',
+           let unlinkFiles = ['game-server/app.js.sio',
           'game-server/app.js',
           'game-server/app.js.wss',
           'game-server/app.js.mqtt',
@@ -269,17 +267,17 @@ function createApplicationAt(ph, type) {
           'web-server/public/index.html',
           'web-server/public/js/lib/component.json',
           'web-server/public/js/lib/pomeloclient.js.wss'];
-          for(var i = 0; i < unlinkFiles.length; ++i) {
+          for(let i = 0; i < unlinkFiles.length; ++i) {
             fs.unlinkSync(path.resolve(ph, unlinkFiles[i]));
           }
           
           fs.renameSync(path.resolve(ph, 'game-server/app.js.udp'), path.resolve(ph, 'game-server/app.js'));
           rmdir(path.resolve(ph, 'web-server/public/js/lib/build'));
           rmdir(path.resolve(ph, 'web-server/public/js/lib/local'));
-          break;
-        case '6':
+        }break;
+        case '6':{
           // use socket.io
-          var unlinkFiles = ['game-server/app.js',
+          let unlinkFiles = ['game-server/app.js',
           'game-server/app.js.wss',
           'game-server/app.js.udp',
           'game-server/app.js.sio',
@@ -288,7 +286,7 @@ function createApplicationAt(ph, type) {
           'web-server/public/index.html',
           'web-server/public/js/lib/component.json',
           'web-server/public/js/lib/pomeloclient.js.wss'];
-          for(var i = 0; i < unlinkFiles.length; ++i) {
+          for(let i = 0; i < unlinkFiles.length; ++i) {
             fs.unlinkSync(path.resolve(ph, unlinkFiles[i]));
           }
 
@@ -297,17 +295,17 @@ function createApplicationAt(ph, type) {
 
           rmdir(path.resolve(ph, 'web-server/public/js/lib/build'));
           rmdir(path.resolve(ph, 'web-server/public/js/lib/local'));
-          break;
+        }break;
         }
-        var replaceFiles = ['game-server/app.js',
+        let replaceFiles = ['game-server/app.js',
         'game-server/package.json',
         'web-server/package.json'];
-        for(var j = 0; j < replaceFiles.length; j++) {
-          var str = fs.readFileSync(path.resolve(ph, replaceFiles[j])).toString();
+        for(let j = 0; j < replaceFiles.length; j++) {
+          let str = fs.readFileSync(path.resolve(ph, replaceFiles[j])).toString();
           fs.writeFileSync(path.resolve(ph, replaceFiles[j]), str.replace('$', name));
         }
-        var f = path.resolve(ph, 'game-server/package.json');
-        var content = fs.readFileSync(f).toString();
+        let f = path.resolve(ph, 'game-server/package.json');
+        let content = fs.readFileSync(f).toString();
         fs.writeFileSync(f, content.replace('#', version));
       }, TIME_INIT);
 }
@@ -320,13 +318,13 @@ function createApplicationAt(ph, type) {
  */
 function start(opts) {
   //opts.directory = '/home/shudingbo/work/serm/game-server';
-  var absScript = path.resolve(opts.directory, 'app.js');
+  let absScript = path.resolve(opts.directory, 'app.js');
 
   if (!fs.existsSync(absScript)) {
     abort(SCRIPT_NOT_FOUND);
   }
 
-  var logDir = path.resolve(opts.directory, 'logs');
+  let logDir = path.resolve(opts.directory, 'logs');
   if (!fs.existsSync(logDir)) {
     fs.mkdirSync(logDir);
   }
@@ -412,7 +410,7 @@ function list(opts) {
             servers.push(info);
           }
           
-          var comparer = function(a, b) {
+          let comparer = function(a, b) {
             if (a.serverType < b.serverType) {
               return -1;
             } else if (a.serverType > b.serverType) {
@@ -426,7 +424,7 @@ function list(opts) {
             }
           };
           servers.sort(comparer);
-          var rows = [];
+          let rows = [];
           let curTime = (new Date()).valueOf();
           rows.push(['serverId', 'serverType', 'pid','host', 'rss(M)', 'heap(M)', 'uptime(m)']);
           servers.forEach(function(server) {
@@ -565,7 +563,7 @@ function terminal(signal, opts) {
             servers.push(info);
           }
           
-          var comparer = function(a, b) {
+          let comparer = function(a, b) {
             if (a.frontend < b.frontend) {
               return 1;
             }else{
@@ -720,9 +718,9 @@ function copy(origin, target) {
     if(err) {
       abort(FILEREAD_ERROR);
     }
-    for(var i = 0; i < datalist.length; i++) {
-      var oCurrent = path.resolve(origin, datalist[i]);
-      var tCurrent = path.resolve(target, datalist[i]);
+    for(let i = 0; i < datalist.length; i++) {
+      let oCurrent = path.resolve(origin, datalist[i]);
+      let tCurrent = path.resolve(target, datalist[i]);
       if(fs.statSync(oCurrent).isFile()) {
         fs.writeFileSync(tCurrent, fs.readFileSync(oCurrent, ''), '');
         console.log('   create : '.green + tCurrent);
@@ -786,7 +784,7 @@ function connectorType(cb) {
 function runServer(server, cb) {
   starter.setEnv( server.par.env );
 
-  var cmd, key;
+  let cmd, key;
   if(utils.isLocal(server.par.host)) {
 
     let options = [];
