@@ -579,32 +579,55 @@ function terminal(signal, opts) {
           };
           servers.sort(comparer);
           //////////// Send Stop Cmd
+          let cmd = `{"command":"${signal}"}`;
+          let stopData = {};
+          let retKeys = [];
           for( let ser of servers ){
-              console.log(`i ${ser.serverId} now stoping...`);
-              let keySerId = keyRegPre + ":" + ser.serverId;
-              let cmd = {"command":signal};
-              await client.set( keySerId, JSON.stringify(cmd) );
+            console.log(`i ${ser.serverId} now stoping...`);
+            let keySerId = keyRegPre + ":" + ser.serverId;
+            stopData[keySerId] = cmd;
+            retKeys.push( keySerId );
+          }
 
-              if( signal === 'stop' ){
-                let checkCnt = 0;
-                while(1){
-                  await sex_timeout( 2000 );
-                  let bExit = await client.exists( keySerId );
-                  if( bExit == 0 ){
-                    break;
-                  }
-                  checkCnt += 2;
-                  if(checkCnt >= 60){
-                    break;
-                  }
-                }
+          await client.mset( stopData );
 
-                if( checkCnt >= 60 ){
-                  console.log(`x ${ser.serverId} stop has error!`);
-                }else{
-                  console.log(`o ${ser.serverId} stop OK`);
-                }                
+          if( signal === 'stop' ){
+            let checkCnt = 0;
+            let bExits = [];
+            while(1){
+              await sex_timeout( 2000 );
+              bExits = await client.mget( retKeys );
+              let allExit = true;
+              let retKeysTmp = [];
+              for( let i=0;i<bExits.length; i++ ){
+                  if( bExits[i] !== null){
+                      allExit = false;
+                  }else{
+                    retKeysTmp.push(retKeys[i]);
+                    console.log(`i ${retKeys[i]} now stop ok.`);
+                  }
               }
+
+              if( allExit ){
+                break;
+              }
+
+              checkCnt += 2;
+              if(checkCnt >= 60){
+                break;
+              }
+            }
+
+            if( checkCnt >= 60 ){
+              for( let i=0;i<bExits.length; i++ ){
+                  if( bExits[i] !== null){
+                      allExit = false;
+                      console.log(`x ${retKeys[i]} stop err.`);
+                  }
+              }
+            }else{
+              console.log(`o all stop OK`);
+            }                
           }
         }
         ///////////////////////
