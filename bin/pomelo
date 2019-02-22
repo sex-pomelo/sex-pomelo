@@ -425,10 +425,9 @@ function list(opts) {
           };
           servers.sort(comparer);
           let rows = [];
-          let curTime = (new Date()).valueOf();
           rows.push(['serverId', 'serverType', 'pid','host', 'rss(M)', 'heap(M)', 'uptime(m)']);
           servers.forEach(function(server) {
-            let uptime = util.format('%f', parseFloat((curTime-server.uptime)/60000).toFixed(2));
+            let uptime = server.uptime;
             let rss = server.rss || 0;
             let heapTotal = server.heapTotal || 0;
             let heapUsed = server.heapUsed || 0;

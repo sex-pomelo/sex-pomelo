@@ -50,13 +50,6 @@
       "layout": {"type": "basic"},
       "backups": 5
     },
-    "pomelo-admin":{
-      "type": "file",
-      "filename": "${opts:base}/logs/pomelo-admin.log",
-      "maxLogSize": 1048576,
-      "layout": {"type": "basic"},
-      "backups": 5
-    },
     "pomelo-rpc":{
       "type": "file",
       "filename": "${opts:base}/logs/pomelo-rpc.log",
@@ -80,7 +73,6 @@
       "crash-log": { "appenders": ["crash-log"], "level":"info" },
       "admin-log": { "appenders": ["admin-log"], "level":"info" },
       "pomelo": { "appenders": ["pomelo"], "level":"info" },
-      "pomelo-admin": { "appenders": ["pomelo-admin"], "level":"info" },
       "pomelo-rpc": { "appenders": ["pomelo-rpc"], "level":"info" },
       "default": { "appenders": ["comm-log"], "level":"info" }
   },
