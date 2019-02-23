@@ -26,7 +26,7 @@
           port: port,
           log: true
         }, function() {
-        pomelo.request("connector.entryHandler.entry", "hello pomelo", function(data) {
+        pomelo.request("connector.entryHandler.entry", {msg:"hello pomelo"}, function(data) {
             alert(data.msg);
           });
         });
@@ -42,12 +42,15 @@
       </div>
       <div class="g-background">
         <div class="g-content">
-          Welcome to Pomelo
+          Welcome to Sex-Pomelo
         </div>
       </div>
       <div class="g-link">
         Home:
-        <a href="https://github.com/NetEase/pomelo">https://github.com/NetEase/pomelo</a>
+        <a href="https://github.com/sex-pomelo/sex-pomelo">https://github.com/sex-pomelo/sex-pomelo</a>
+        <p style="font-size:12px;">
+          Fork from:<a href="https://github.com/NetEase/pomelo">https://github.com/NetEase/pomelo</a>
+        </p>
       </div>
       <div class="g-button">
         <input id="test" type="button" value="Test Game Server" onclick="show()"/>

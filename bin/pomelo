@@ -352,11 +352,13 @@ function start(opts) {
 
         let serInfo = typeHasSer[j];
         let bParamOK = true;
-        if( (serInfo.id != undefined) && (serInfo.port != undefined)){
+        if( (serInfo.id != undefined)){
           params['id']   = serInfo.id;
           params['host'] = serInfo.host;
-          params['port'] = serInfo.port;
 
+          if(serInfo.port != undefined){
+            params['port'] = serInfo.port;
+          }
           if( serInfo.frontend === true){
             if( serInfo.clientPort != undefined )
             {
