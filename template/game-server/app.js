@@ -1,4 +1,4 @@
-const pomelo = require('pomelo');
+const pomelo = require('@sex-pomelo/sex-pomelo');
 
 /**
  * Init app for client.
