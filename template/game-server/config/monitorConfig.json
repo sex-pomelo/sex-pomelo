@@ -1,0 +1,24 @@
+{
+    "development":{
+        "monitor": "redismonitor",
+        "redisNodes":{
+            "nodes":[{"host": "127.0.0.1","port": 6379}]
+        },
+        "period": 5000,
+        "expire": 20000,
+        "maxServerInfoBatch": 1000,
+        "keyPre":"sexp",
+        "memInfo":true
+    },
+    "production":{
+        "monitor": "redismonitor",
+        "redisNodes":{
+            "nodes":[{"host": "127.0.0.1","port": 6379}]
+        },
+        "period": 5000,
+        "expire": 20000,
+        "maxServerInfoBatch": 1000,
+        "keyPre":"sexp",
+        "memInfo":false
+    }
+}

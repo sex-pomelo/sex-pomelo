@@ -31,7 +31,7 @@ let DEFAULT_GAME_SERVER_DIR = CUR_DIR;
 let DEFAULT_REDIS_PRE = 'pomelo';
 let DEFAULT_PWD = 'admin';
 let DEFAULT_ENV = 'development';
-let DEFAULT_MASTER_HOST = '192.168.2.12';
+let DEFAULT_MASTER_HOST = '127.0.0.1';
 let DEFAULT_MASTER_PORT = 6379;
 
 let CONNECT_ERROR = 'Fail to connect to admin console server.';
