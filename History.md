@@ -1,3 +1,8 @@
+2.2.10 / 2019-07-16
+=================
+  * Fix template error 
+
+
 2.2.9 / 2018-12-09
 =================
   * Suggest use **nodejs > 8.x**,maybe can use 4.x,6.x;

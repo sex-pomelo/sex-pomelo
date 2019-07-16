@@ -1,4 +1,4 @@
-const pomelo = require('pomelo');
+const pomelo = require('@sex-pomelo/sex-pomelo');
 
 /**
  * Init app for client.
@@ -13,9 +13,11 @@ app.configure('production|development', 'connector', function(){
       connector : pomelo.connectors.hybridconnector,
       heartbeat : 3,
       useDict : true,
-      useProtobuf : true
+      useProtobuf : true,
+      disconnectOnTimeout:true,
     });
 });
+
 
 // start app
 app.start();
