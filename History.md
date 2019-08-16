@@ -1,3 +1,8 @@
+2.2.11 / 2019-08-16
+=================
+  * upgrade log4js to 5.0.0 ( sex-pomelo-logger dep it)
+
+
 2.2.10 / 2019-07-16
 =================
   * Fix template error 
