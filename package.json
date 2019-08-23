@@ -1,6 +1,6 @@
 {
   "name": "@sex-pomelo/sex-pomelo",
-  "version": "2.2.11",
+  "version": "2.2.11-9",
   "homepage": "https://github.com/sex-pomelo/sex-pomelo",
   "repository": {
     "type": "git",
@@ -27,7 +27,7 @@
     "server"
   ],
   "dependencies": {
-    "socket.io": "1.7.4",
+    "socket.io": "2.2.0",
     "async": "^2.6.1",
     "seq-queue": "0.0.5",
     "cliff": "0.1.10",
@@ -35,10 +35,10 @@
     "pomelo-loader": "0.0.6",
     "@sex-pomelo/sex-pomelo-rpc": "^1.0.11",
     "@sex-pomelo/sex-pomelo-protocol": "^0.1.7",
-    "@sex-pomelo/sex-pomelo-admin": "^1.0.3",
+    "@sex-pomelo/sex-pomelo-admin": "1.0.4",
     "@sex-pomelo/sex-pomelo-logger": "^0.1.11",
     "@sex-pomelo/sex-pomelo-scheduler": "^0.4.4",
-    "ws": "1.1.5",
+    "ws": "~6.1.4",
     "pomelo-protobuf": "0.4.0",
     "node-bignumber": "1.2.1",
     "commander": "2.0.0",
@@ -51,10 +51,12 @@
     "should": "3.3.1",
     "mocha": ">=0.0.1",
     "muk": ">=0.0.1",
-    "grunt": "~0.4.2",
-    "grunt-mocha-test": "0.8.x",
+    "grunt": "~1.0.4",
+    "grunt-mocha-test": "~0.13.3",
     "grunt-contrib-clean": "0.5.x",
-    "grunt-contrib-jshint": "~0.8.0",
-    "blanket": "~1.1.6"
-  }
+    "grunt-contrib-jshint": "~2.1.0",
+    "blanket": "~1.1.6",
+    "@types/node": "^10.12.18"
+  },
+  "types": "types/index.d.ts"
 }

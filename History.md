@@ -1,3 +1,8 @@
+2.2.12 / 2019-08-22
+=================
+  * upgrade ws, sex-pomelo-admin
+  * add IntelliSense
+
 2.2.11 / 2019-08-16
 =================
   * upgrade log4js to 5.0.0 ( sex-pomelo-logger dep it)
