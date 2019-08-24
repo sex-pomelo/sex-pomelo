@@ -1,11 +1,12 @@
 /// <reference types="node" />
+import {SessionService} from './sessionService'
+
+import {Channel,ChannelService} from './channelService'
 
 export interface SexPomeloServer
 {
   /** Server's ID */
   id: String
-
-
 }
 
 
@@ -15,16 +16,66 @@ export interface SexPomeloLogger
 
 }
 
-export interface SexPomeloSessionService
-{
-  //getByUid(session.uid):
+
+
+declare type Message = {
+
+  /** route String */
+  route:String;
+
+  /** message data(overlay) */
+  data: Any; 
+} 
+
+
+declare type ChannelServiceSendOpt ={
+  /** Send to user only session has bind(True) */
+  binded:Boolean;
+
+  filterParam:Object;
 }
+
+/** Connector Send Message Opt */
+declare type ConnectorSendOpt = {
+  
+  /** Send Type */
+  type:String|'broadcast';
+
+  /** User filter param */
+  userOptions:ChannelServiceSendOpt;
+
+}
+
+export interface Connector{
+
+  /** 
+   *  Send Message
+   * 
+   * @param {Null|Number} reqId request id
+   * @param {String} route  route string of the message
+   * @param {Message} msg message content after encoded
+   * @param {Array} recvs array of receiver's session id
+   * @param {ConnectorSendOpt} opts options
+   * @param {Function} cb callback function 
+   */
+  send(reqId:Number, route:String, msg:Message, recvs:Array, opts:ConnectorSendOpt, cb:Function):void
+
+}
+
+
+export interface Components{
+  
+  /** net Conntecor  */
+  __connector__:Connector;
+
+}
+
 
 
 export interface SexPomeloApplication {
 
   /** name -> component map*/
-  components:Object;
+  components:Components;
 
 
 
@@ -136,7 +187,17 @@ export interface SexPomeloApplication {
    * @param {String} setting application setting
    * @return {String|Mixed} val
    */
-  get (setting):String
+  get (setting:String):String
+
+  
+  /** Get Session Services */
+  get( setting:'sessionService'  ):SessionService;
+
+  /** Get Route map */
+  get( setting:'__routes__'  ):Object;
+
+  /** Get channel Services */
+  get( setting:'channelService'  ):ChannelService;
 
 
   /**
@@ -374,9 +435,38 @@ export interface SexPomeloApplication {
    * @param  {Array} crons old crons would be removed in application
    */
   removeCrons(crons):void;
+}
 
 
+/////////
+declare interface Hybridconnector extends Connector{
 
 }
 
-export function createApp(opts: object): SexPomeloApplication;
+declare interface Sioconnector extends Connector{
+
+}
+
+declare interface Udpconnector extends Connector{
+
+}
+
+declare interface Mqttconnector extends Connector{
+
+}
+
+declare type PomeloConnectors = {
+  
+  /** Hybrid connector */
+  hybridconnector : Hybridconnector;
+
+  sioconnector : Sioconnector;
+  udpconnector : Udpconnector;
+  mqttconnector : Mqttconnector;
+}
+
+declare module '@sex-pomelo/sex-pomelo' {
+  
+  export const connectors : PomeloConnectors;
+  export function createApp(opts: object): SexPomeloApplication;
+}
