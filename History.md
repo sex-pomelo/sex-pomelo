@@ -1,7 +1,23 @@
 2.2.12 / 2019-08-22
 =================
   * upgrade ws, sex-pomelo-admin
-  * add IntelliSense
+  * add IntelliSense ( pomelo.SexPomeloApplication )
+```
+const pomelo = require('@sex-pomelo/sex-pomelo');  ///// <----- add
+
+module.exports = function(app) {
+    return new Handler(app);
+};
+
+/**
+ * 
+ * @param {pomelo.SexPomeloApplication} app       ///// <----- add
+ */
+let Handler = function(app) {
+  ....
+}
+
+```
 
 2.2.11 / 2019-08-16
 =================
