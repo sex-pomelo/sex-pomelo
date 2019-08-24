@@ -1,7 +1,14 @@
+
+const pomelo = require('@sex-pomelo/sex-pomelo');
+
 module.exports = function(app) {
   return new Handler(app);
 };
 
+/**
+ * 
+ * @param { pomelo.SexPomeloApplication } app 
+ */
 var Handler = function(app) {
   this.app = app;
 };

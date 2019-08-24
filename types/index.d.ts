@@ -1,5 +1,6 @@
 /// <reference types="node" />
 import {SessionService} from './sessionService'
+import {BackendSessionService} from './backendSessionService'
 
 import {Channel,ChannelService} from './channelService'
 
@@ -71,12 +72,68 @@ export interface Components{
 }
 
 
+export type ServerInfo = {
+  main:String;
+  env:String;
+  id:String;
+  host:String;
+  port:Integer;
+  clientPort:Integer;
+  /** is frontend server 'true'|'false' */
+  frontend:String;
+  serverType:String;
+}
+
+
 
 export interface SexPomeloApplication {
 
   /** name -> component map*/
   components:Components;
 
+  /** current server id */
+  serverId:String;
+
+  serverType:String;
+
+  curServer:ServerInfo;
+
+  /**current global server info maps, id -> info */
+  serevers:Object;
+
+  /** current global type maps, type -> [info] */
+  serverTypeMaps:Object;
+  
+  /** current global server type list */
+  serverTypes:Array;
+
+  /** Backend Session Service */
+  backendSessionService:BackendSessionService;
+
+  /** Session Service */
+  sessionService:SessionService;
+
+  /** Channel Service */
+  channelService:ChannelService;
+  
+  /** rpc 调用
+   * 
+   * app.rpcInvoke( serId,
+        {   namespace:'user',
+            serverType:serType,
+            service:'gameRemote',
+            method:'leaveGame',
+            args: args
+        },function( err, result){
+            console.log('-----RPCNotifyPlazaUserLeave: err: ',err," result: ", result);
+        });
+   * 
+   * 
+   * @param {String} serId Server'sID
+   * @param {Object} msg 
+   * @param {Function} cb 
+   */
+  rpcInvoke(serId:String, msg:Object, cb:Function);
 
 
   /**
@@ -192,6 +249,9 @@ export interface SexPomeloApplication {
   
   /** Get Session Services */
   get( setting:'sessionService'  ):SessionService;
+
+    /** Get backend Session Services */
+  get( setting:'backendSessionService'):BackendSessionService;
 
   /** Get Route map */
   get( setting:'__routes__'  ):Object;
@@ -465,8 +525,32 @@ declare type PomeloConnectors = {
   mqttconnector : Mqttconnector;
 }
 
-declare module '@sex-pomelo/sex-pomelo' {
+declare interface PushSchedulersDirect{
+  schedule(reqId, route, msg, recvs, opts, cb);
+}
+
+declare interface PushSchedulersBuffer{
+  schedule(reqId, route, msg, recvs, opts, cb);
+}
+
+declare type PomeloPushSchedulers = {
   
+  /** send data direct */
+  direct : PushSchedulersDirect;
+
+  /** send data batch */
+  buffer : PushSchedulersBuffer;
+}
+
+declare module '@sex-pomelo/sex-pomelo' {
+  export const app : SexPomeloApplication;
   export const connectors : PomeloConnectors;
+  export const pushSchedulers : PomeloPushSchedulers;
+
+  /**
+   * auto loaded components
+   */
+  export const components:Object;
+
   export function createApp(opts: object): SexPomeloApplication;
 }
