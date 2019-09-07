@@ -25,7 +25,7 @@ declare type Message = {
   route:String;
 
   /** message data(overlay) */
-  data: Any; 
+  data; 
 } 
 
 
