@@ -195,6 +195,7 @@ function createApplicationAt(ph, type) {
   setTimeout(function() {
     switch(type) {
       case '1':
+        {
          // use websocket
          let unlinkFiles = ['game-server/app.js.sio',
          'game-server/app.js.wss',
@@ -210,8 +211,9 @@ function createApplicationAt(ph, type) {
          for(let i = 0; i < unlinkFiles.length; ++i) {
             fs.unlinkSync(path.resolve(ph, unlinkFiles[i]));
          }
-        break;
+        }break;
         case '2':
+          {
           // use socket.io
           let unlinkFiles = ['game-server/app.js',
           'game-server/app.js.wss',
@@ -231,8 +233,9 @@ function createApplicationAt(ph, type) {
 
           rmdir(path.resolve(ph, 'web-server/public/js/lib/build'));
           rmdir(path.resolve(ph, 'web-server/public/js/lib/local'));
-          break;
+        }break;
         case '3':
+          {
           // use websocket wss
           let unlinkFiles = ['game-server/app.js.sio',
           'game-server/app.js',
@@ -252,8 +255,9 @@ function createApplicationAt(ph, type) {
           fs.renameSync(path.resolve(ph, 'game-server/app.js.wss'), path.resolve(ph, 'game-server/app.js'));
           fs.renameSync(path.resolve(ph, 'web-server/app.js.https'), path.resolve(ph, 'web-server/app.js'));
           fs.renameSync(path.resolve(ph, 'web-server/public/js/lib/build/build.js.wss'), path.resolve(ph, 'web-server/public/js/lib/build/build.js'));
-          break;
+        }break;
         case '4':
+          {
           // use socket.io wss
            let unlinkFiles = ['game-server/app.js.sio',
           'game-server/app.js',
@@ -275,8 +279,9 @@ function createApplicationAt(ph, type) {
           rmdir(path.resolve(ph, 'web-server/public/js/lib/build'));
           rmdir(path.resolve(ph, 'web-server/public/js/lib/local'));
           fs.unlinkSync(path.resolve(ph, 'web-server/public/js/lib/component.json'));
-          break;
+        }break;
         case '5':
+          {
           // use socket.io wss
            let unlinkFiles = ['game-server/app.js.sio',
           'game-server/app.js',
@@ -294,8 +299,9 @@ function createApplicationAt(ph, type) {
           fs.renameSync(path.resolve(ph, 'game-server/app.js.udp'), path.resolve(ph, 'game-server/app.js'));
           rmdir(path.resolve(ph, 'web-server/public/js/lib/build'));
           rmdir(path.resolve(ph, 'web-server/public/js/lib/local'));
-          break;
+        }break;
         case '6':
+          {
           // use socket.io
           let unlinkFiles = ['game-server/app.js',
           'game-server/app.js.wss',
@@ -315,7 +321,7 @@ function createApplicationAt(ph, type) {
 
           rmdir(path.resolve(ph, 'web-server/public/js/lib/build'));
           rmdir(path.resolve(ph, 'web-server/public/js/lib/local'));
-          break;
+        }break;
         }
         let replaceFiles = ['game-server/app.js',
         'game-server/package.json',
