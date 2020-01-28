@@ -3,9 +3,9 @@
 const Application = require('../lib/application');
 
 /**
- * BaseGameHandler is a base class that can be extended.
+ * BaseGameRemote is a base class that can be extended.
  */
-class BaseGameHandler {
+class BaseGameRemote {
 
   /**
    * 
@@ -16,4 +16,4 @@ class BaseGameHandler {
   }
 }
 
-module.exports = BaseGameHandler;
+module.exports = BaseGameRemote;

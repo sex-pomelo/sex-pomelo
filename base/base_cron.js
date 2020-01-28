@@ -3,9 +3,9 @@
 const Application = require('../lib/application');
 
 /**
- * BaseGameHandler is a base class that can be extended.
+ * BaseCron is a base class that can be extended.
  */
-class BaseGameHandler {
+class BaseCron {
 
   /**
    * 
@@ -16,4 +16,4 @@ class BaseGameHandler {
   }
 }
 
-module.exports = BaseGameHandler;
+module.exports = BaseCron;
