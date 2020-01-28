@@ -1,6 +1,8 @@
 'use strict';
 
-const Application = require('../lib/application');
+/**
+ * @typedef {import('../lib/application').Application} Application
+ */
 
 /**
  * BaseCron is a base class that can be extended.

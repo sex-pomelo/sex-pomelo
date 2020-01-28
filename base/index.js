@@ -35,3 +35,9 @@ exports.Lifecycle = require('./base_lifecycle').BaseLifecycle;
  * @since 2.2.15
  */
 exports.Cron = require('./base_cron');
+
+ /** sex-pomelo component base content
+ * @member {SexPomelo} SexPomelo#BaseComponent
+ * @since 2.2.15
+ */
+exports.BaseComponent = require('./base_component');
