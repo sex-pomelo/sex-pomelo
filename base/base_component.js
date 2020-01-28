@@ -26,7 +26,7 @@ class BaseComponent {
 	 * @return {Void}
 	 */
 	start (cb) {
-		//process.nextTick(cb);
+		process.nextTick(cb);
 	}
 
 	/**
@@ -36,7 +36,7 @@ class BaseComponent {
 	 * @return {Void}
 	 */
 	afterStart(cb) {
-		//process.nextTick(cb);
+		process.nextTick(cb);
 	}
 
 	/**
@@ -47,7 +47,7 @@ class BaseComponent {
 	 * @return {Void}
 	 */
 	stop(force, cb) {
-		//process.nextTick(cb);
+		process.nextTick(cb);
 	}
 }
 
