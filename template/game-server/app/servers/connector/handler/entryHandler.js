@@ -1,17 +1,15 @@
 
-const pomelo = require('@sex-pomelo/sex-pomelo');
+const GameHandler = require('@sex-pomelo/sex-pomelo/base').GameHandler;
 
-module.exports = function(app) {
-  return new Handler(app);
-};
 
-/**
- * 
- * @param { pomelo.SexPomeloApplication } app 
+class EntryHandler extends GameHandler{
+
+	/** If you have some init ,you should do it here,
+	   rember call super(app) first.
  */
-var Handler = function(app) {
-  this.app = app;
-};
+	// constructor(app){
+	// 	super(app);
+	// }
 
 /**
  * New client entry.
@@ -21,8 +19,9 @@ var Handler = function(app) {
  * @param  {Function} next    next step callback
  * @return {Void}
  */
-Handler.prototype.entry = function(msg, session, next) {
-  next(null, {code: 200, msg: 'game server is ok.'});
+	entry(msg, session, next) {
+		let serID = this.app.serverId;
+		next(null, {code: 200, msg: `game server is ok. [${serID}]`});
 };
 
 /**
@@ -33,13 +32,13 @@ Handler.prototype.entry = function(msg, session, next) {
  * @param  {Function} next    next step callback
  * @return {Void}
  */
-Handler.prototype.publish = function(msg, session, next) {
+	publish(msg, session, next) {
 	var result = {
 		topic: 'publish',
 		payload: JSON.stringify({code: 200, msg: 'publish message is ok.'})
 	};
   next(null, result);
-};
+	}
 
 /**
  * Subscribe route for mqtt connector.
@@ -49,10 +48,19 @@ Handler.prototype.publish = function(msg, session, next) {
  * @param  {Function} next    next step callback
  * @return {Void}
  */
-Handler.prototype.subscribe = function(msg, session, next) {
+	subscribe(msg, session, next) {
 	var result = {
 		topic: 'subscribe',
 		payload: JSON.stringify({code: 200, msg: 'subscribe message is ok.'})
 	};
   next(null, result);
 };
+}
+
+
+
+module.exports = function(app) {
+  return new EntryHandler(app);
+};
+
+

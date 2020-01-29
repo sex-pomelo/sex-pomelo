@@ -41,3 +41,9 @@ exports.Cron = require('./base_cron');
  * @since 2.2.15
  */
 exports.BaseComponent = require('./base_component');
+
+ /** sex-pomelo filter base class
+ * @member {SexPomelo} SexPomelo#BaseFilter
+ * @since 2.2.15
+ */
+exports.BaseFilter = require('./base_filter');
