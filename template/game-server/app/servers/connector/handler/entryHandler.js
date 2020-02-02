@@ -6,12 +6,12 @@ class EntryHandler extends GameHandler{
 
 	/** If you have some init ,you should do it here,
 	   rember call super(app) first.
- */
+  */
 	// constructor(app){
 	// 	super(app);
 	// }
 
-/**
+ /**
  * New client entry.
  *
  * @param  {Object}   msg     request message
@@ -22,7 +22,7 @@ class EntryHandler extends GameHandler{
 	entry(msg, session, next) {
 		let serID = this.app.serverId;
 		next(null, {code: 200, msg: `game server is ok. [${serID}]`});
-};
+  }
 
 /**
  * Publish route for mqtt connector.
@@ -33,11 +33,11 @@ class EntryHandler extends GameHandler{
  * @return {Void}
  */
 	publish(msg, session, next) {
-	var result = {
-		topic: 'publish',
-		payload: JSON.stringify({code: 200, msg: 'publish message is ok.'})
-	};
-  next(null, result);
+		var result = {
+			topic: 'publish',
+			payload: JSON.stringify({code: 200, msg: 'publish message is ok.'})
+		};
+		next(null, result);
 	}
 
 /**
@@ -49,15 +49,13 @@ class EntryHandler extends GameHandler{
  * @return {Void}
  */
 	subscribe(msg, session, next) {
-	var result = {
-		topic: 'subscribe',
-		payload: JSON.stringify({code: 200, msg: 'subscribe message is ok.'})
-	};
-  next(null, result);
-};
+		var result = {
+			topic: 'subscribe',
+			payload: JSON.stringify({code: 200, msg: 'subscribe message is ok.'})
+		};
+		next(null, result);
+	}
 }
-
-
 
 module.exports = function(app) {
   return new EntryHandler(app);
