@@ -1,3 +1,6 @@
+2.2.16 / 2020-02-16
+=================
+ * use sex-pomelo-admin 1.0.5, now windows can enable systemInfo module
 
 2.2.15 / 2020-01-29
 =================

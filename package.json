@@ -1,6 +1,6 @@
 {
   "name": "@sex-pomelo/sex-pomelo",
-  "version": "2.2.15",
+  "version": "2.2.16",
   "homepage": "https://github.com/sex-pomelo/sex-pomelo",
   "repository": {
     "type": "git",
@@ -35,7 +35,7 @@
     "pomelo-loader": "0.0.6",
     "@sex-pomelo/sex-pomelo-rpc": "^1.0.11",
     "@sex-pomelo/sex-pomelo-protocol": "^0.1.7",
-    "@sex-pomelo/sex-pomelo-admin": "1.0.4",
+    "@sex-pomelo/sex-pomelo-admin": "1.0.5",
     "@sex-pomelo/sex-pomelo-logger": "^0.1.11",
     "@sex-pomelo/sex-pomelo-scheduler": "^0.4.4",
     "ws": "~6.1.4",
