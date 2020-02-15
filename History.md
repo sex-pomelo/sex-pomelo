@@ -1,3 +1,7 @@
+2.2.17 / 2020-02-15
+=================
+ * Fix connector.js loadInit err. 
+
 2.2.16 / 2020-02-16
 =================
  * use sex-pomelo-admin 1.0.5, now windows can enable systemInfo module
