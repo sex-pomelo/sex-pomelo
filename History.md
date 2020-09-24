@@ -1,5 +1,5 @@
 
-2.2.21 / 2020-09-24
+2.2.23 / 2020-09-24
 =================
 **Breaking changes**
  * Config load path change.
