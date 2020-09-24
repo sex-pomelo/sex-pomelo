@@ -1,67 +1,6 @@
 
-2.2.23 / 2020-09-24
+2.2.24 / 2020-09-24
 =================
-**Breaking changes**
- * Config load path change.
-   The original development and production configurations are all in the same file, such as Servers.json, which is not conducive to version management, so make the following update.
-    > Original config format
-      
-      The config directory structure 
-      ``` 
-        + config
-          - servers.json
-      ```
-
-      servers.json
-      ``` json
-        
-        {
-          "development" : {},
-          "production": {}
-        }
-
-      ```
-    > New config format
-      The config directory structure 
-      ``` 
-        + config
-          + development     // for development env
-            - servers.json
-            - master.json
-            - log4js.json
-          + [anotherEnv]    // for another env
-            - servers.json
-            - master.json
-            - log4js.json  
-          - servers.json    // for production env
-          - master.json
-          - log4js.json
-      ```
-
-      config/servers.json for production env
-      ``` json
-        {
-          "production": {}
-        }
-
-      ```
-
-      config/**development**/servers.json for development env
-      ``` json
-        {
-          "development": {}
-        }
-
-      ```
-
-      config/**anotherEnv**/servers.json for development env
-      ``` json
-        {
-          "anotherEnv": {}
-        }
-
-   ```
-**Other Change**
  * Application add function **getCfgPath** using,get config file by run env.
    ``` js
     let robPath = app.getCfgPath('robot.json');
@@ -72,7 +11,8 @@
     // <app root>/config/development/robot.json -- for development env
    ```
  * Remove mkdirp dep.  use fs.mkdir replace
-
+ * modify the Pomelo read configuration file, first read it by folder
+ * Start Env non (development and production) , console process without exiting
 
 2.2.18 / 2020-02-20
 =================
