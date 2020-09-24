@@ -8,7 +8,6 @@ const fs = require('fs'),
   path = require('path'),
   util = require('util'),
   cliff = require('cliff'),
-  mkdirp = require('mkdirp'),
   co = require('../lib/modules/console'),
   utils = require('../lib/util/utils'),
   starter = require('../lib/master/starter'),
@@ -623,14 +622,17 @@ function copy(origin, target) {
  * @param {Function} fn
  */
 function mkdir(path, fn) {
-  mkdirp(path, 0755, function(err){
+
+  fs.mkdir( path, {recursive:true, mode:0o755}, (err)=>{
     if(err) {
       throw err;
     }
+
     console.log('   create : '.green + path);
     if(typeof fn === 'function') {
       fn();
     }
+
   });
 }
 

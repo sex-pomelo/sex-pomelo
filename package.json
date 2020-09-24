@@ -1,6 +1,6 @@
 {
   "name": "@sex-pomelo/sex-pomelo",
-  "version": "2.2.20",
+  "version": "2.2.23",
   "homepage": "https://github.com/sex-pomelo/sex-pomelo",
   "repository": {
     "type": "git",
@@ -31,7 +31,6 @@
     "async": "^2.6.1",
     "seq-queue": "0.0.5",
     "cliff": "0.1.10",
-    "mkdirp": "0.3.3",
     "pomelo-loader": "0.0.6",
     "@sex-pomelo/sex-pomelo-rpc": "^1.0.11",
     "@sex-pomelo/sex-pomelo-protocol": "^0.1.7",
