@@ -1,4 +1,14 @@
 
+
+2.2.25 / 2020-09-28
+=================
+ * log4js config file, first read it by env folder;
+ * Add script to package.json( can run ```npm start``` )
+	- npm start
+	- npm stop
+	- npm run dev
+
+
 2.2.24 / 2020-09-24
 =================
  * Application add function **getCfgPath** using,get config file by run env.
