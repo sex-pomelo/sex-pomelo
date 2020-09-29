@@ -1,3 +1,12 @@
+2.2.26 / 2020-09-28
+=================
+ **New features**
+ * app.configure(...) add exclude type. If the server type string starts with ! At first, this configuration is used by all servers except type
+``` js
+app.configure('development', '!connector|gate', function(){
+   // executed for development env and not connector，not gate server type
+});
+```
 
 
 2.2.25 / 2020-09-28
