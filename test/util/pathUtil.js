@@ -13,7 +13,7 @@ describe('path util test', function() {
       var p = pathUtil.getSysRemotePath(role);
       should.exist(p);
       fs.existsSync(p).should.be.true;
-      utils.endsWith(p, expectSuffix).should.be.true;
+      p.endsWith(expectSuffix).should.be.true;
     });
 
     it('should return the system remote service path for backend server', function() {
@@ -22,7 +22,7 @@ describe('path util test', function() {
       var p = pathUtil.getSysRemotePath(role);
       should.exist(p);
       fs.existsSync(p).should.be.true;
-      utils.endsWith(p, expectSuffix).should.be.true;
+      p.endsWith(expectSuffix).should.be.true;
     });
 
   });
@@ -34,7 +34,7 @@ describe('path util test', function() {
       var p = pathUtil.getUserRemotePath(mockBase, serverType);
       should.exist(p);
       fs.existsSync(p).should.be.true;
-      utils.endsWith(p, expectSuffix).should.be.true;
+      p.endsWith(expectSuffix).should.be.true;
     });
 
     it('should return null if the directory not exist', function() {
@@ -84,7 +84,7 @@ describe('path util test', function() {
       var p = pathUtil.getHandlerPath(mockBase, serverType);
       should.exist(p);
       fs.existsSync(p).should.be.true;
-      utils.endsWith(p, expectSuffix).should.be.true;
+      p.endsWith(expectSuffix).should.be.true;
     });
 
     it('should return null if the directory not exist', function() {
@@ -102,14 +102,14 @@ describe('path util test', function() {
     var p = pathUtil.getScriptPath(mockBase);
     var expectSuffix = '/scripts';
     should.exist(p);
-    utils.endsWith(p, expectSuffix).should.be.true;
+    p.endsWith( expectSuffix).should.be.true;
   });
 
   describe('#getLogPath', function() {
     var p = pathUtil.getLogPath(mockBase);
     var expectSuffix = '/logs';
     should.exist(p);
-    utils.endsWith(p, expectSuffix).should.be.true;
+    p.endsWith( expectSuffix).should.be.true;
   });
 
 });

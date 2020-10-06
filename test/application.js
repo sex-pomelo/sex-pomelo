@@ -1,9 +1,12 @@
-var app = require('../lib/application');
+var Application = require('../lib/application');
 var pomelo = require('../');
 var should = require('should');
 
 var WAIT_TIME = 1000;
 var mockBase = process.cwd() + '/test';
+
+let app = new Application();
+
 
 describe('application test', function(){
   afterEach(function() {

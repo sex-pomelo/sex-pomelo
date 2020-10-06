@@ -1,13 +1,13 @@
 {
   "name": "@sex-pomelo/sex-pomelo",
-  "version": "2.2.25-1",
+  "version": "2.2.25-2",
   "homepage": "https://github.com/sex-pomelo/sex-pomelo",
   "repository": {
     "type": "git",
     "url": "https://github.com/sex-pomelo/sex-pomelo"
   },
   "scripts": {
-    "test": "grunt"
+    "test": "sh ./test.sh"
   },
   "bugs": {
     "url": "https://github.com/sex-pomelo/sex-pomelo/issues"
@@ -48,13 +48,7 @@
   },
   "devDependencies": {
     "should": "3.3.1",
-    "mocha": ">=0.0.1",
-    "muk": ">=0.0.1",
-    "grunt": "~1.0.4",
-    "grunt-mocha-test": "~0.13.3",
-    "grunt-contrib-clean": "0.5.x",
-    "grunt-contrib-jshint": "~2.1.0",
-    "blanket": "~1.1.6",
+    "mocha": "8.1.3",
     "@types/node": "^10.12.18"
   }
 }

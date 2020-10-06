@@ -34,52 +34,6 @@ describe('utils test', function() {
     });
   });
 
-  describe('#startsWith', function() {
-    it('should return true if the string do start with the prefix', function() {
-      var src = 'prefix with a string';
-      var prefix = 'prefix';
-
-      utils.startsWith(src, prefix).should.be.true;
-    });
-
-    it('should return false if the string not start with the prefix', function() {
-      var src = 'prefix with a string';
-      var prefix = 'prefix222';
-
-      utils.startsWith(src, prefix).should.be.false;
-
-      prefix = 'with';
-      utils.startsWith(src, prefix).should.be.false;
-    });
-
-    it('should return false if the src not a string', function() {
-      utils.startsWith(1, 'str').should.be.false;
-    });
-  });
-
-  describe('#endsWith', function() {
-    it('should return true if the string do end with the prefix', function() {
-      var src = 'string with a suffix';
-      var suffix = 'suffix';
-
-      utils.endsWith(src, suffix).should.be.true;
-    });
-
-    it('should return false if the string not end with the prefix', function() {
-      var src = 'string with a suffix';
-      var suffix = 'suffix222';
-
-      utils.endsWith(src, suffix).should.be.false;
-
-      suffix = 'with';
-      utils.endsWith(src, suffix).should.be.false;
-    });
-
-    it('should return false if the src not a string', function() {
-      utils.endsWith(1, 'str').should.be.false;
-    });
-  });
-
   describe('#hasChineseChar', function() {
     it('should return false if the string does not have any Chinese characters', function() {
       var src = 'string without Chinese characters';
