@@ -362,9 +362,8 @@ describe('application test', function(){
           console.log('condition1');
           cb();
         },
-        test2: function(cb) {
+        test2: async function() {
           console.log('condition2');
-          cb();
         }
       };
       var flag = 1;

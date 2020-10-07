@@ -28,7 +28,6 @@
   ],
   "dependencies": {
     "socket.io": "2.2.0",
-    "async": "^2.6.1",
     "seq-queue": "0.0.5",
     "cliff": "0.1.10",
     "pomelo-loader": "0.0.6",

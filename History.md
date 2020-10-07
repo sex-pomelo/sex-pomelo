@@ -9,9 +9,10 @@ app.configure('development', '!connector|gate', function(){
 ```
 --- 
 **Other Change**
-* fix test script error.
-  - remove grunt dep, Direct use mocha command run test.
+ * fix test script error.
+	- remove grunt dep, Direct use mocha command run test.
 	- change `npm run test`, use `test.sh`, run all test script.
+ * remove third library `async` dependence, use ES6 async replace
 
 2.2.25 / 2020-09-28
 =================
