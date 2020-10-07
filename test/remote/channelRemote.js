@@ -161,6 +161,8 @@ describe('channel remote test', function() {
       channelRemote.broadcast(mockRoute, mockMsg, {type: 'broadcast', userOptions: {binded: true}}, function() {
         invokeCount.should.equal(1);
         done();
+
+        setTimeout( () => { app.stop(true); }, 100 );
       });
     });
   });

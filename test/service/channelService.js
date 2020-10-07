@@ -236,6 +236,8 @@ describe('channel manager test', function() {
           sids.should.include(connectorIds[i]);
         }
         done();
+
+        setTimeout( () => { app.stop(true); }, 600 );
       });
     });
   });

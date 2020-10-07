@@ -9,9 +9,11 @@ var mockData = {
 
 describe('#rpcLogFilter',function(){
   it("should do after filter by before filter",function(done){
-    rpcLogFilter.before(mockData.serverId,mockData.msg,mockData.opts,function(serverId,msg,opts){
-      rpcLogFilter.after(serverId,msg,opts,function(serverId,msg,opts){
-        should.exist(opts.__start_time__);
+    let filter = rpcLogFilter();
+    filter.before(mockData.serverId,mockData.msg,mockData.opts,function(serverId,msg,opts){
+      should.exist(mockData.opts.__start_time__);
+      filter.after(mockData.serverId,mockData.msg,mockData.opts,function(serverId,msg,opts){
+        should.exist(mockData.opts.__start_time__);
         done();
       });
     });

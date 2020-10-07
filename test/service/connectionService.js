@@ -114,7 +114,8 @@ describe('connection service test', function() {
   it('should getStatisticsInfo',  function(done){
     var service = new ConnectionService(mockApp);
     var uid1 = 'uid1', uid2 = 'uid2';
-    var info1 = 'msg1', info2 = 'msg2';
+    var info1 = { uid: uid1, msg:'msg1'};
+    const info2 = { uid: uid2, msg:'msg2'};
 
     service.increaseConnectionCount();
     service.increaseConnectionCount();

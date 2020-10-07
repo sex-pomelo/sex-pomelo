@@ -7,7 +7,11 @@ app.configure('development', '!connector|gate', function(){
    // executed for development env and not connector，not gate server type
 });
 ```
-
+--- 
+**Other Change**
+* fix test script error.
+  - remove grunt dep, Direct use mocha command run test.
+	- change `npm run test`, use `test.sh`, run all test script.
 
 2.2.25 / 2020-09-28
 =================

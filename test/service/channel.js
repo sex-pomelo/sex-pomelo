@@ -142,6 +142,8 @@ describe('channel test', function() {
       channel.pushMessage(mockMsg, function() {
         invokeCount.should.equal(2);
         done();
+
+        setTimeout( () => { app.stop(true); }, 1000 );
       });
     });
     it('should fail if channel has destroied', function() {

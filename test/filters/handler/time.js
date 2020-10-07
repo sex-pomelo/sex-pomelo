@@ -7,7 +7,7 @@ var mockSession = {
 };
 
 var WAIT_TIME = 100;
-describe("#serialFilter",function(){
+describe("#timeFilter",function(){
   it("should do before filter ok",function(done){
     var service = new FilterService();
     var filter = serialFilter();
@@ -42,6 +42,5 @@ describe("#serialFilter",function(){
     });
 
     setTimeout(done,WAIT_TIME);
-    done();
   });
 });

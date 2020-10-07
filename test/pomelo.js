@@ -11,7 +11,15 @@ describe('pomelo', function() {
       var app2 = pomelo.app;
       should.exist(app2);
       should.strictEqual(app, app2);
-      done();
+
+      setTimeout( ()=>{
+        done();
+        setTimeout( () =>{ app.stop( true ); }, 100 );
+      }, 60 );
+      
     });
+
   });
+
 });
+

@@ -32,13 +32,13 @@ describe("#serialFilter",function(){
       should.exist(mockSession);
       should.exist(mockSession.__serialTask__);
       _session = mockSession;
-    });
 
-    service.after(filter);
+      service.after(filter);
 
-    service.afterFilter(null,null,mockSession,null,function(){
-      should.exist(mockSession);
-      should.strictEqual(mockSession,_session);
+      service.afterFilter(null,null,mockSession,null,function(){
+        should.exist(mockSession);
+        should.strictEqual(mockSession,_session);
+      });
     });
 
     setTimeout(done,WAIT_TIME);

@@ -30,6 +30,7 @@ check_suffix()
     local file=$1
     
     if [ "${file##*.}"x = "js"x ];then
+        echo "\033[40;36m start mocha $file \033[0m"
         mocha $file
         if [ "$?" -ne 0 ]; then
           echo "$file Run Error, exit Code $runErr"

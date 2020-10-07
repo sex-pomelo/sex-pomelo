@@ -18,33 +18,33 @@ describe("#toobusyFilter",function(){
       done();
     });
   });
+  // Because toobusy filter is Castration, so stop test it
+  // it("should do before filter error because of too busy",function(done){
+  //   var service = new FilterService();
+  //   var filter = toobusyFilter();
+  //   service.before(filter);
 
-  it("should do before filter error because of too busy",function(done){
-    var service = new FilterService();
-    var filter = toobusyFilter();
-    service.before(filter);
+  //   var exit = false;
+  //   function load() {
+  //     service.beforeFilter(null,mockSession,function(err, resp){
+  //       should.exist(mockSession);
+  //       console.log('err: ' + err);
+  //       if (!!err) {
+  //         exit = true;
+  //       }
+  //     });
 
-    var exit = false;
-    function load() {
-      service.beforeFilter(null,mockSession,function(err, resp){
-        should.exist(mockSession);
-        console.log('err: ' + err);
-        if (!!err) {
-          exit = true;
-        }
-      });
+  //     console.log('exit: ' + exit);
+  //     if (exit) {
+  //       return done();
+  //     }
+  //     var start = new Date();
+  //     while ((new Date() - start) < 250) {
+  //       for (var i = 0; i < 1e5;) i++;
+  //     }
+  //     setTimeout(load, 0);
+  //   }
+  //   load();
 
-      console.log('exit: ' + exit);
-      if (exit) {
-        return done();
-      }
-      var start = new Date();
-      while ((new Date() - start) < 250) {
-        for (var i = 0; i < 1e5;) i++;
-      }
-      setTimeout(load, 0);
-    }
-    load();
-
-  });
+  // });
 });
