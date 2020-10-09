@@ -13,6 +13,7 @@ app.configure('development', '!connector|gate', function(){
 	- remove grunt dep, Direct use mocha command run test.
 	- change `npm run test`, use `test.sh`, run all test script.
  * remove third library `async` dependence, use ES6 async replace
+ * fix Distributed startup failure [#778](https://github.com/NetEase/pomelo/issues/778). `TypeError: Cannot read property 'get' of undefined`
 
 2.2.25 / 2020-09-28
 =================
