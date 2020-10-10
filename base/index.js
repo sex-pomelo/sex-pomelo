@@ -47,3 +47,9 @@ exports.BaseComponent = require('./base_component');
  * @since 2.2.15
  */
 exports.BaseFilter = require('./base_filter');
+
+ /** sex-pomelo App base class
+ * @member {SexPomelo} SexPomelo#BaseApp
+ * @since 2.2.26
+ */
+exports.BaseApp = require('./base_app');
