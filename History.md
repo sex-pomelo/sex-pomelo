@@ -2,10 +2,43 @@
 =================
  **New features**
  * app.configure(...) add exclude type. If the server type string starts with ! At first, this configuration is used by all servers except type
+	``` js
+	app.configure('development', '!connector|gate', function(){
+		// executed for development env and not connector，not gate server type
+	});
+	```
+* Implement BaseApp helper class. You can simplify the writing of app.js in a configuration way.
+  - config.js, The app config file
+  - route.json, the route config file
 ``` js
-app.configure('development', '!connector|gate', function(){
-   // executed for development env and not connector，not gate server type
-});
+const pomelo = require('@sex-pomelo/sex-pomelo');
+const BaseApp = require('@sex-pomelo/sex-pomelo/base').BaseApp;
+
+
+class MyApp extends BaseApp{
+	constructor(){
+		super( pomelo );
+	}
+
+	preLoadCfg(){
+	}
+
+	preStart(){
+		const { app } = this;
+
+		// app configure
+		app.configure('production|development', function() {
+			app.enable('systemMonitor');
+		});
+	}
+
+	postStart() {
+
+	}
+
+};
+
+new MyApp();
 ```
 --- 
 **Other Change**

@@ -110,12 +110,12 @@ class BaseApp {
         {
             connector : this.pomelo.connectors[cfg.connectorConfig.connectors],
             transports: cfg.connectorConfig.transports,
-            disconnectOnTimeout:true,
+            disconnectOnTimeout: (cfg.connectorConfig.disconnectOnTimeout === true),
             heartbeat : cfg.connectorConfig.heartbeat,
-            timeout   : cfg.connectorConfig.timeout
+            timeout   : cfg.connectorConfig.timeout,
             // enable useProto
-            //,useProtobuf: true
-            //,useDict: useDict
+            useProtobuf: (cfg.connectorConfig.useProtobuf === true),
+            useDict: (cfg.connectorConfig.useDict === true)
         });
       });
     }
@@ -233,10 +233,29 @@ class BaseApp {
       }
 
       if( load === true ){
+        let isInterFilter = false;
         let filterPath = path.join( base, it.package );
-        let f = require( filterPath );
-        app.filter(f());
+        if( fs.existsSync( filterPath) === false){
+          filterPath += '.js';
+          if( fs.existsSync( filterPath ) === false ){
+            if( this.pomelo.filters[it.package] ){
+              isInterFilter = true;
+            }
+          }
+        }
+
+        let paras = it.argv ? it.argv : [];
+
+        if( isInterFilter === false ){
+          let f = require( filterPath );
+          app.filter(f(... paras));
+        } else {
+          let f = this.pomelo.filters[it.package];
+          app.filter( f(... paras) );
+        }
       }
+
+      //console.log( '--- filter', load, this.serverType, it.package );
     }
 
   }
@@ -247,13 +266,38 @@ class BaseApp {
     if( typeof(rCfg) !== 'object' ) {
       return;
     }
+
+    let basePath = app.getBase();
     let routeJsonFile = app.getCfgPath(rCfg.cfg);
 
     if( contains( this.serverType, rCfg.serverType ) === false ){
-      this.checkRoute(rCfg);
+      // virtual load RouteFun
+      if( rCfg.routeFunc ) {
+        for( let rType in rCfg.routeFunc ){
+          this.routeFun[rType] = require( path.join( basePath, rCfg.routeFunc[rType]) );          
+        }
+      }
+
+      this.checkRoute(rCfg, () =>{
+        this.routeFun = {};
+        if( rCfg.routeFunc ) {
+          for( let rType in rCfg.routeFunc ){
+            let maJs = require.resolve( path.join( basePath, rCfg.routeFunc[rType]));
+            delete require.cache[ maJs ];
+          }
+        }
+      });
+
       return;
     }
 
+    // load RouteFun
+    if( rCfg.routeFunc ) {
+      for( let rType in rCfg.routeFunc ){
+        this.routeFun[rType] = require( path.join( basePath, rCfg.routeFunc[rType]) );
+      }
+    }
+    
     if( rCfg.checkInterval > 1000 ){
       this.setRoute(routeJsonFile);
       setInterval( ()=>{ this.setRoute(routeJsonFile);}, rCfg.checkInterval );
@@ -262,7 +306,7 @@ class BaseApp {
     }
   }
 
-  checkRoute(rCfg){
+  checkRoute(rCfg, cb){
     const {app} = this;
     let routeJsonFile = app.getCfgPath(rCfg.cfg);
 
@@ -278,6 +322,7 @@ class BaseApp {
           for( let rType in routeJson.route){
             if( routeJson.route[rType].indexOf( this.serverType) !== -1 ){
               if( this.routeFun[rType] ) {
+                cb();
                 return;
               }
             }
@@ -293,6 +338,10 @@ class BaseApp {
     });
   }
 
+  /** Setup route
+   * @param {string} routeJsonFile route json config file path
+   * 
+   */
   setRoute( routeJsonFile ){
     const {app} = this;
     fs.readFile( routeJsonFile,(err,data) =>{

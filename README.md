@@ -94,6 +94,7 @@ With the following references, you can quickly familiarize yourself with the pom
 * [ljhsai](https://github.com/ljhsai)
 * [zhanghaojie](https://github.com/zhanghaojie)
 * [airandfingers](https://github.com/airandfingers)
+* [shudingbo](https://github.com/shudingbo)
 
 ## License
 
