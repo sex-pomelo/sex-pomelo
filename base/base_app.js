@@ -46,6 +46,8 @@ class BaseApp {
 
     this.routeFun = {};
 
+    this.routeFileCTime = 0;  // route file change Time
+
     process.on('uncaughtException', (err) =>{
       let szErr = err.stack.toString();
       if(szErr.indexOf('read ECONNRESET') !== -1){
@@ -299,10 +301,10 @@ class BaseApp {
     }
     
     if( rCfg.checkInterval > 1000 ){
-      this.setRoute(routeJsonFile);
-      setInterval( ()=>{ this.setRoute(routeJsonFile);}, rCfg.checkInterval );
+      this.setRoute(rCfg.cfg);
+      setInterval( ()=>{ this.setRoute(rCfg.cfg);}, rCfg.checkInterval );
     } else {
-      this.setRoute(routeJsonFile);
+      this.setRoute(rCfg.cfg);
     }
   }
 
@@ -339,30 +341,36 @@ class BaseApp {
   }
 
   /** Setup route
-   * @param {string} routeJsonFile route json config file path
+   * @param {string} cfgFile route json config file name
    * 
    */
-  setRoute( routeJsonFile ){
+  async setRoute( cfgFile ){
     const {app} = this;
-    fs.readFile( routeJsonFile,(err,data) =>{
-      if( !err ){
-        let routeJson = JSON.parse(data);
-        let routes = app.get('__routes__');
-        for( let rType in routeJson.route){
-          if( this.routeFun[rType] ){
-            for( let ser of routeJson.route[rType] ){
-              let set = (!routes || !routes[ser]) ? true : false;
-              if( set === true ){
-                app.route(ser, this.routeFun[rType]);
-                logger.info( '--- set route', this.serverType, ser, this.routeFun[rType] );
-              }
+
+    try{
+      let stat = await fs.promises.stat(app.getCfgPath(cfgFile) );
+      if( this.routeFileCTime === stat.mtimeMs){
+        return;
+      }
+
+      this.routeFileCTime = stat.mtimeMs;
+
+      let routeJson = await app.getCfg( cfgFile, true );
+      let routes = app.get('__routes__');
+      for( let rType in routeJson.route){
+        if( this.routeFun[rType] ){
+          for( let ser of routeJson.route[rType] ){
+            let set = (!routes || !routes[ser]) ? true : false;
+            if( set === true ){
+              app.route(ser, this.routeFun[rType]);
+              logger.info( '--- set route', this.serverType, ser, this.routeFun[rType] );
             }
           }
         }
-      } else {
-        logger.error(err.toString());
       }
-    });
+    } catch (err) {
+      logger.error(err.toString());
+    }
   }
 
   errorHandler( err,msg,resp,session,next ){
