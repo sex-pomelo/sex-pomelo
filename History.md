@@ -7,9 +7,11 @@
 		// executed for development env and not connector，not gate server type
 	});
 	```
-* Implement BaseApp helper class. You can simplify the writing of app.js in a configuration way.
-  - config.js, The app config file
-  - route.json, the route config file
+* Implement [App helper class](https://github.com/sex-pomelo/sex-pomelo/wiki/App-helper-Class). You can simplify the writing of app.js in a configuration way.
+  - Configuration control load `plugin`,`configs`,`components`,`filters`,`route`.
+  - Reduce unnecessary JS requires.
+  - More developer-friendly.
+  - Routing dynamic loading, [ **only load new serverType and route function** ].
 ``` js
 const pomelo = require('@sex-pomelo/sex-pomelo');
 const BaseApp = require('@sex-pomelo/sex-pomelo/base').BaseApp;
