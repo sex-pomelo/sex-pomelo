@@ -107,7 +107,7 @@ class BaseApp {
     }
 
     if( cfg.connectorConfig ){
-      app.configure('production|development' ,() =>{
+      app.configure(() =>{
         app.set('connectorConfig',
         {
             connector : this.pomelo.connectors[cfg.connectorConfig.connectors],
