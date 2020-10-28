@@ -1,3 +1,8 @@
+2.2.26-1 / 2020-10-28
+=================
+* Use clifflite replace cliff( node14 cliff has (**`warning`** ).
+
+
 2.2.26 / 2020-09-28
 =================
  **New features**
