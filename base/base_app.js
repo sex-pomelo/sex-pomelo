@@ -117,7 +117,8 @@ class BaseApp {
             timeout   : cfg.connectorConfig.timeout,
             // enable useProto
             useProtobuf: (cfg.connectorConfig.useProtobuf === true),
-            useDict: (cfg.connectorConfig.useDict === true)
+            useDict: (cfg.connectorConfig.useDict === true),
+            useAsyncSend: (cfg.connectorConfig.useAsyncSend === true),
         });
       });
     }
