@@ -29,8 +29,8 @@
   "dependencies": {
     "socket.io": "3.0.2",
     "seq-queue": "0.0.5",
-    "clifflite": "^0.0.3",
-    "pomelo-loader": "0.0.6",
+    "clifflite": "^0.0.4",
+    "pomelo-loader": "0.0.7",
     "@sex-pomelo/sex-pomelo-rpc": "1.0.14",
     "@sex-pomelo/sex-pomelo-protocol": "0.1.7",
     "@sex-pomelo/sex-pomelo-admin": "1.0.9",
