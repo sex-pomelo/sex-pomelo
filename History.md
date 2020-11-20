@@ -1,8 +1,9 @@
-2.2.26-2 / 2020-11-14
+2.2.26-x / 2020-11-14
 =================
 * Use clifflite replace cliff( node14 cliff has (**`warning`** ).
 * connector add cfg `useAsyncSend`, if true async send data package.
 * `new Buffer` change to `Buffer.from`,`Buffer.alloc` 
+* update deps
 
 
 2.2.26 / 2020-09-28
