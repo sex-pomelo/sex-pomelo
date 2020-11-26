@@ -4,6 +4,8 @@
 * connector add cfg `useAsyncSend`, if true async send data package.
 * `new Buffer` change to `Buffer.from`,`Buffer.alloc` 
 * update deps
+  - sex-pomelo-protocol, Message encode performance improvement(Opt-in for performance and spec compliance `npm install --save @sex-pomelo/pomelo-coderx`)
+* hybrifsocket/tcpsocket Performance improvement( packageHeadBuffer )
 
 
 2.2.26 / 2020-09-28
