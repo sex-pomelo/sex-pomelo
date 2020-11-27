@@ -1,4 +1,4 @@
-2.2.26-x / 2020-11-14
+2.2.27 / 2020-11-27
 =================
 * Use clifflite replace cliff( node14 cliff has (**`warning`** ).
 * connector add cfg `useAsyncSend`, if true async send data package.
