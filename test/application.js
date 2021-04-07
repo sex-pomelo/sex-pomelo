@@ -340,8 +340,8 @@ describe('application test', function(){
   describe('#route', function() {
     it('should add route record and could fetch it later', function() {
       var type1 = 'area', type2 = 'connector';
-      var func1 = function() {console.log('func1');};
-      var func2 = function() {console.log('func2');};
+      var func1 = function() {console.info('func1');};
+      var func2 = function() {console.info('func2');};
 
       app.init({base: mockBase});
 
@@ -359,21 +359,21 @@ describe('application test', function(){
     it('should execute all conditions and handlers', function() {
       var conditions = {
         test1: function(cb) {
-          console.log('condition1');
+          console.info('condition1');
           cb();
         },
         test2: async function() {
-          console.log('condition2');
+          console.info('condition2');
         }
       };
       var flag = 1;
       var handlers = {
         do1: function(cb) {
-          console.log('handler1');
+          console.info('handler1');
           cb();
         },
         do2: function(cb) {
-          console.log('handler2');
+          console.info('handler2');
           if(flag < 3){
             flag ++;
             cb(new Error('error'));
@@ -388,25 +388,25 @@ describe('application test', function(){
     it('shoud execute conditions with error and do not execute handlers', function() {
       var conditions = {
         test1: function(cb) {
-          console.log('condition1');
+          console.info('condition1');
           cb();
         },
         test2: function(cb) {
-          console.log('condition2');
+          console.info('condition2');
           cb(new Error('error'));
         },
         test3: function(cb) {
-          console.log('condition3');
+          console.info('condition3');
           cb();
         }
       };
       var handlers = {
         do1: function(cb) {
-          console.log('handler1');
+          console.info('handler1');
           cb();
         },
         do2: function(cb) {
-          console.log('handler2');
+          console.info('handler2');
           cb();
         }
       };

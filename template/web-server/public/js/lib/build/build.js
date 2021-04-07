@@ -1411,7 +1411,7 @@ require.register("pomelonode-pomelo-jsclient-websocket/lib/pomelo-client.js", fu
   };
 
   var initWebSocket = function(url,cb) {
-    console.log('connect to ' + url);
+    console.info('connect to ' + url);
     var onopen = function(event){
       var obj = Package.encode(Package.TYPE_HANDSHAKE, Protocol.strencode(JSON.stringify(handshakeBuffer)));
       send(obj);
@@ -1443,7 +1443,7 @@ require.register("pomelonode-pomelo-jsclient-websocket/lib/pomelo-client.js", fu
     if(socket) {
       if(socket.disconnect) socket.disconnect();
       if(socket.close) socket.close();
-      console.log('disconnect');
+      console.info('disconnect');
       socket = null;
     }
 

@@ -16,7 +16,7 @@ const fs = require('fs'),
   version = require('../package.json').version,
   adminClient = require('@sex-pomelo/sex-pomelo-admin').adminClient,
   constants = require('../lib/util/constants'),
-  program = require('commander');
+  commander = require('commander');
 
 const fsP = fs.promises;
 
@@ -47,6 +47,7 @@ let MASTER_HA_NOT_FOUND = 'Fail to find an appropriate masterha config file, \np
 let COMMAND_ERROR = 'Illegal command format. Use `pomelo --help` to get more info.\n'.red;
 let DAEMON_INFO = 'The application is running in the background now.\n';
 
+const program = new commander.Command();
 program.version(version);
 
 program.command('init [path]')
@@ -72,7 +73,7 @@ program.command('list')
   .option('-p, --password <password>', 'administration password', DEFAULT_PWD)
   .option('-h, --host <master-host>', 'master server host', DEFAULT_MASTER_HOST)
   .option('-P, --port <master-port>', 'master server port', DEFAULT_MASTER_PORT)
-  .action(function(opts) {
+  .action((opts) => {
     list(opts);
   });
 
@@ -82,10 +83,8 @@ program.command('add')
   .option('-p, --password <password>', 'administration password', DEFAULT_PWD)
   .option('-h, --host <master-host>', 'master server host', DEFAULT_MASTER_HOST)
   .option('-P, --port <master-port>', 'master server port', DEFAULT_MASTER_PORT)
-  .action(function() {
-    let args = [].slice.call(arguments, 0);
-    let opts = args[args.length - 1];
-    opts.args = args.slice(0, -1);
+  .action((opts, command) => {
+    opts.args = command.args || {};
     add(opts);
   });
 
@@ -95,10 +94,8 @@ program.command('stop')
   .option('-p, --password <password>', 'administration password', DEFAULT_PWD)
   .option('-h, --host <master-host>', 'master server host', DEFAULT_MASTER_HOST)
   .option('-P, --port <master-port>', 'master server port', DEFAULT_MASTER_PORT)
-  .action(function() {
-    let args = [].slice.call(arguments, 0);
-    let opts = args[args.length - 1];
-    opts.serverIds = args.slice(0, -1);
+  .action((opts, command) => {
+    opts.serverIds = command.args || {};
     terminal('stop', opts);
   });
 
@@ -109,10 +106,8 @@ program.command('kill')
   .option('-h, --host <master-host>', 'master server host', DEFAULT_MASTER_HOST)
   .option('-P, --port <master-port>', 'master server port', DEFAULT_MASTER_PORT)
   .option('-f, --force', 'using this option would kill all the node processes')
-  .action(function() {
-    let args = [].slice.call(arguments, 0);
-    let opts = args[args.length - 1];
-    opts.serverIds = args.slice(0, -1);
+  .action((opts, command) => {
+    opts.serverIds = command.args || {};
     terminal('kill', opts);
   });
 
@@ -137,7 +132,7 @@ program.command('masterha')
 
 program.command('*')
   .action(function() {
-    console.log(COMMAND_ERROR);
+    console.info(COMMAND_ERROR);
   });
 
 program.parse(process.argv);
@@ -148,7 +143,7 @@ program.parse(process.argv);
  * @param {String} path
  */
 function init(path) {
-  console.log(INIT_PROJ_NOTICE);
+  console.info(INIT_PROJ_NOTICE);
   connectorType(function(type) {
     emptyDirectory(path, function(empty) {
       if(empty) {
@@ -362,15 +357,15 @@ function start(opts) {
   if (opts.daemon) {
     ls = spawn(process.execPath, params, {detached: true, stdio: 'ignore'});
     ls.unref();
-    console.log(DAEMON_INFO);
+    console.info(DAEMON_INFO);
     process.exit(0);
   } else {
     ls = spawn(process.execPath, params);
     ls.stdout.on('data', function(data) {
-      console.log(data.toString());
+      console.info(data.toString());
     });
     ls.stderr.on('data', function(data) {
-      console.log(data.toString());
+      console.info(data.toString());
     });
   }
 }
@@ -389,7 +384,9 @@ function list(opts) {
       }
       let servers = [];
       for(let key in data.msg) {
-        servers.push(data.msg[key]);
+        if(data.msg[key]){
+          servers.push(data.msg[key]);
+        }
       }
       let comparer = function(a, b) {
         if (a.serverType < b.serverType) {
@@ -410,7 +407,7 @@ function list(opts) {
       servers.forEach(function(server) {
         rows.push([server.serverId, server.serverType, server.pid, server.rss, server.heapTotal, server.heapUsed, server.uptime]);
       });
-      console.log(cliff.stringifyRows(rows, ['red', 'blue', 'green', 'cyan', 'magenta', 'white', 'yellow']));
+      console.info(cliff.stringifyRows(rows, ['red', 'blue', 'green', 'cyan', 'magenta', 'white', 'yellow']));
       process.exit(0);
     });
   });
@@ -464,9 +461,9 @@ function terminal(signal, opts) {
       }
       if(signal === 'kill') {
         if(msg.code === 'ok') {
-          console.log('All the servers have been terminated!');
+          console.info('All the servers have been terminated!');
         } else {
-          console.log('There may be some servers remained:', msg.serverIds);
+          console.info('There may be some servers remained:', msg.serverIds);
         }
       }
       process.exit(0);
@@ -567,7 +564,7 @@ function prompt(msg, fn) {
   if(' ' === msg[msg.length - 1]) {
     process.stdout.write(msg);
   } else {
-    console.log(msg);
+    console.info(msg);
   }
   process.stdin.setEncoding('ascii');
   process.stdin.once('data', function(data) {
@@ -597,7 +594,7 @@ async function copy(origin, target) {
   }
   if(!fs.existsSync(target)) {
     await mkdir(target);
-    console.log('   create : '.green + target);
+    console.info('   create : '.green + target);
   }
 
   let datalist = fs.readdirSync( origin );
@@ -607,7 +604,7 @@ async function copy(origin, target) {
     let tCurrent = path.resolve(target, datalist[i]);
     if(fs.statSync(oCurrent).isFile()) {
       fs.writeFileSync(tCurrent, fs.readFileSync(oCurrent, ''), '');
-      console.log('   create : '.green + tCurrent);
+      console.info('   create : '.green + tCurrent);
     } else if(fs.statSync(oCurrent).isDirectory()) {
       await copy(oCurrent, tCurrent);
     }
@@ -622,7 +619,7 @@ async function copy(origin, target) {
  */
 async function mkdir(path, fn) {
   await fsP.mkdir( path, {recursive:true, mode:0o755} );
-  console.log('   create : '.green + path);
+  console.info('   create : '.green + path);
 }
 
 /**
@@ -645,7 +642,7 @@ function connectorType(cb) {
          cb(msg.trim());
          break;
       default:
-         console.log('Invalid choice! Please input 1 - 5.'.red + '\n');
+         console.info('Invalid choice! Please input 1 - 5.'.red + '\n');
          connectorType(cb);
          break;
     }
