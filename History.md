@@ -1,3 +1,7 @@
+2.2.27-4 /2021-04-29
+=================
+* hybridsocket, add Get client real IP through X-Forwarded-For,Take only one.
+
 2.2.27 / 2020-11-27
 =================
 * Use clifflite replace cliff( node14 cliff has (**`warning`** ).
