@@ -1,6 +1,12 @@
-2.2.27-4 /2021-04-29
+2.2.28 /2021-05-08
 =================
-* hybridsocket, add Get client real IP through X-Forwarded-For,Take only one.
+* hybridsocket, add Get client real IP through X-Forwarded-For (Take only one).
+* Update `commander` dep.
+
+---- chinese
+* hybridsocket，增加通过 X-Forwarded-For 获取真实IP（用于前端有代理如nginx时的情况）。
+* 升级 commander 包版本.
+* 其它一些小修改
 
 2.2.27 / 2020-11-27
 =================
