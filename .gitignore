@@ -19,3 +19,4 @@ coverage.html
 .idea/*
 package-lock.json
 test/out/
+npmls.txt

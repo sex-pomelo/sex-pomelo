@@ -27,26 +27,26 @@
     "server"
   ],
   "dependencies": {
-    "socket.io": "3.1.2",
-    "clifflite": "^0.0.4",
-    "pomelo-loader": "0.0.7",
-    "@sex-pomelo/sex-pomelo-rpc": "1.0.14",
-    "@sex-pomelo/sex-pomelo-protocol": "^0.1.9",
     "@sex-pomelo/sex-pomelo-admin": "1.0.9",
-    "@sex-pomelo/sex-pomelo-logger": "0.1.13",
+    "@sex-pomelo/sex-pomelo-logger": "0.1.14",
+    "@sex-pomelo/sex-pomelo-protocol": "^0.1.9",
+    "@sex-pomelo/sex-pomelo-rpc": "1.0.14",
     "@sex-pomelo/sex-pomelo-scheduler": "0.4.5",
-    "ws": "^7.3.1",
-    "pomelo-protobuf": "0.4.0",
-    "node-bignumber": "1.2.1",
+    "clifflite": "^0.0.4",
     "commander": "^7.x",
-    "mqtt": "^4.2.6"
+    "mqtt": "^4.2.8",
+    "node-bignumber": "1.2.1",
+    "pomelo-loader": "0.0.7",
+    "pomelo-protobuf": "0.4.0",
+    "socket.io": "^4.4.0",
+    "ws": "^8.2.3"
   },
   "bin": {
     "pomelo": "./bin/pomelo"
   },
   "devDependencies": {
-    "should": "3.3.1",
-    "mocha": "8.1.3",
-    "@types/node": "^10.12.18"
+    "@types/node": "^16.0.0",
+    "mocha": "^9.1.3",
+    "should": "^13.2.3"
   }
 }
