@@ -171,7 +171,11 @@ class BaseApp {
 
       //console.log( '--- cfg,', it.name, load, it.serverType, this.serverType  );
       if( load === true ){
-        app.loadConfig(it.name, app.getCfgPath( it.cfg));
+        if( typeof(it.cfg) === 'string') {
+          app.loadConfig(it.name, app.getCfgPath( it.cfg));
+        } else {
+          app.loadConfig(it.name, it.cfg);
+        }
       }
     }
   }
@@ -195,8 +199,14 @@ class BaseApp {
       }
 
       if( load === true ){
-        let compPath = path.join( base, it.name );
-        let comp = require( compPath );
+        let comp = null;
+        if( it.name.startsWith('__') && it.name.endsWith('__') ) {
+          let name = it.name.substring(2, it.name.length - 2);
+          comp = this.pomelo[name];
+        } else {
+          let compPath = path.join( base, it.name );
+          comp = require( compPath );
+        }
         
         let cfgDef = {};
         if( typeof(it.serverTypeNick) === 'string' && it.serverTypeNick.length > 0 ){

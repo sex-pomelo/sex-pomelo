@@ -1,3 +1,83 @@
+2.3.0 /2021-11-26
+=================
+* Update the route compression component. The original component will scan all handlers and generate dictionaries, which will lead to unexpected interface leakage and security problems.
+Now it is updated that only manually set routes will be exposed and compressed. Change to set the route that can be compressed through dictionary.json.
+* Add ```i18n``` built in components
+
+---- chinese
+### 1. 更新路由压缩组件
+原有组件会扫描所有 handler，生成字典，这样会导致接口意外暴漏，导致安全问题。
+现在更新为只有手动设置的路由才会暴漏并压缩。改动为通过 dictionary.json 设置可以压缩的路由。
+
+dictionary.json
+``` js
+{
+    "route":{
+        "chat":[
+            "ChatHandler.send"
+        ],
+        "connector" :[
+            "entryHandler.enter"
+        ],
+        "gate" :[
+            "gateHandler.queryEntry"
+        ]
+    },
+    "notify": [
+        "onChat",
+        "onAdd",
+        "onLeave"
+    ]
+}
+
+```
+ * 保留 通过 ```useDict```，开启路由压缩功能
+ * ```route```, 设置每类服务器需要压缩的路由
+   - key，服务类型，支持通用匹配 如果connector 和 gate 暴漏的路由一样，可以写成 "gate|connector"
+   - val，需要压缩的路由数组
+ * ```notify```,同原有通知路由
+
+### 2. 增加```i18n```内置组件
+通过 ```pomelo.i18n```开启，配置参数如下
+``` json
+{
+"path": "app/locale", // set locale path，optional, default <root>/locale
+"locale": ["en-US","zh-CN"], // use locale, optional
+"default": "en-US"             // default locale, required
+}
+```
+
+``` js
+app.configure('production|development' ,'!master',function() {
+    app.load( pomelo.i18n,{
+          path: 'app/locale',          // set locale path，optional, default <root>/locale
+          locale: ['en-US','zh-CN'],   // use locale, optional
+          default: 'en-US'             // default locale, required
+        }
+    });
+});
+```
+
+通过config配置
+``` config.js
+
+components: [
+	{
+		name: '__i18n__', // 使用内置组件，按照格式 __<内置组件名字>__
+		serverType: 'gate',
+		cfg: { 
+			path: 'app/locale',
+			locale: ["en-US","zh-CN"],
+			default: i18n,
+			localeFiledName: 'lang'
+		}
+	},
+]
+```
+ * 在config.js 模式，使用内置组件，组件的名称需要按照格式 [ ```__<内置组件名字>__``` ]
+
+
+
 2.2.28 /2021-05-08
 =================
 * hybridsocket, add Get client real IP through X-Forwarded-For (Take only one).
