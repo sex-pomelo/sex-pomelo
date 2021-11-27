@@ -1,5 +1,6 @@
 2.3.0 /2021-11-26
 =================
+* Compatible ```Node 16```
 
 **Break change**
 * Update the route compression component. The original component will scan all handlers and generate dictionaries, which will lead to unexpected interface leakage and security problems.
