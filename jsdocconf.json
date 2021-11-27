@@ -1,0 +1,29 @@
+{
+    "tags": {
+        "allowUnknownTags": true,
+        "dictionaries": ["jsdoc","closure"]
+    },
+    "source": {
+		"include": [ "./README.md", "./package.json","./base", "./lib" ],
+		"exclude": [ "./node_modules" ],
+        "includePattern": ".+\\.js(doc)?$",
+        "excludePattern": "(^|\\/|\\\\)_"
+    },
+    "plugins": [],
+    "templates": {
+		"name": "Pomelo API",
+		"footerText": "Sex-pomelo API doc",
+		"tabNames": {
+			"api": "API",
+			"tutorials": "Examples"
+		},
+        "cleverLinks": false,
+        "monospaceLinks": false
+    },
+	"opts": {
+		"template": "node_modules/tui-jsdoc-template",
+		"encoding": "utf8",
+		"destination": "./doc/", 
+		"recurse": true
+	}
+}

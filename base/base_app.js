@@ -35,10 +35,14 @@ class BaseApp {
     /** @type {Application} */
     this.app = pomelo.createApp();
 
-    /** @type {string} Server ID */
+    /** Server ID 
+     * @type {string} 
+     */
     this.serverId = this.app.serverId;
 
-    /** @type {string} Server Type */
+    /** Server Type 
+     * @type {string} 
+     */
     this.serverType = this.app.serverType;
     
     /** @type {SexAppCfg} */

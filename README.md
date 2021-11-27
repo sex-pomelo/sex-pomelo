@@ -68,6 +68,10 @@ With the following references, you can quickly familiarize yourself with the pom
 * [Getting started](https://github.com/NetEase/pomelo/wiki/Welcome-to-Pomelo)
 * [Tutorial](https://github.com/NetEase/pomelo/wiki/Preface)
 
+## Gen jsdoc
+1. Install jsdoc ```npm install jsdoc -g```;
+1. run ```npm run doc```, the html doc output in path **```doc```** 
+
 
 ## Contributors
 * NetEase, Inc. (@NetEase)
@@ -79,6 +83,7 @@ With the following references, you can quickly familiarize yourself with the pom
 * @GeforceLee
 * Harold Jiang(@jzsues)
 * @ETiV
+* [shudingbo](https://github.com/shudingbo)
 * [kaisatec](https://github.com/kaisatec)
 * [roytan883](https://github.com/roytan883)
 * [wuxian](https://github.com/wuxian)
@@ -94,7 +99,6 @@ With the following references, you can quickly familiarize yourself with the pom
 * [ljhsai](https://github.com/ljhsai)
 * [zhanghaojie](https://github.com/zhanghaojie)
 * [airandfingers](https://github.com/airandfingers)
-* [shudingbo](https://github.com/shudingbo)
 
 ## License
 
