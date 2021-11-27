@@ -1,10 +1,16 @@
 2.3.0 /2021-11-26
 =================
+
+**Break change**
 * Update the route compression component. The original component will scan all handlers and generate dictionaries, which will lead to unexpected interface leakage and security problems.
 Now it is updated that only manually set routes will be exposed and compressed. Change to set the route that can be compressed through dictionary.json.
+
+**Feature**
 * Add ```i18n``` built in components
 
 ---- chinese
+
+**Break change**
 ### 1. 更新路由压缩组件
 原有组件会扫描所有 handler，生成字典，这样会导致接口意外暴漏，导致安全问题。
 现在更新为只有手动设置的路由才会暴漏并压缩。改动为通过 dictionary.json 设置可以压缩的路由。
@@ -37,6 +43,7 @@ dictionary.json
    - val，需要压缩的路由数组
  * ```notify```,同原有通知路由
 
+**Feature**
 ### 2. 增加```i18n```内置组件
 通过 ```pomelo.i18n```开启，配置参数如下
 ``` json
