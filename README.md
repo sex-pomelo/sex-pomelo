@@ -16,7 +16,7 @@ Suggest node ver >= 8.x ( not 8.12.0)
 
  * Homepage: <https://shudingbo.github.io/sex-pomelo-doc>
  * Documentation: <https://github.com/sex-pomelo/sex-pomelo>
- * Wiki: <https://github.com/NetEase/pomelo/wiki/>
+ * Wiki: <https://github.com/sex-pomelo/pomelo/wiki/>
  * Issues: <https://github.com/sex-pomelo/sex-pomelo/issues>
  * Tags: game, nodejs
 
@@ -46,7 +46,7 @@ $ npm install -g @sex-pomelo/sex-pomelo
 
 * Many clients support, including Javascript, Android, IOS, Cocos2d-x, C
 * Many libraries and tools, including command line tool, admin tool, performance test tool, AI, path finding etc.
-* Good reference materials: full docs, many examples and [an open-source MMO RPG demo](https://github.com/NetEase/pomelo/wiki/Introduction-to--Lord-of-Pomelo)
+* Good reference materials: full docs, many examples and [an open-source MMO RPG demo](https://github.com/sex-pomelo/pomelo/wiki/Introduction-to--Lord-of-Pomelo)
 
 ### Extensible
 
@@ -60,13 +60,13 @@ Pomelo has the following advantages:
 * The architecture is scalable. It uses a multi-process, single thread runtime architecture, which has been proven in the industry and is especially suited to the node.js thread model.
 * Easy to use, the development model is quite similar to web, using convention over configuration, with almost zero config. The [API](http://pomelo.netease.com/api.html) is also easy to use.
 * The framework is extensible. Based on the node.js micro module principle, the core of pomelo is small. All of the components, libraries and tools are individual npm modules, and anyone can create their own module to extend the framework.
-* The reference materials and documentation are quite complete. In addition to the documentation, we also provide [an open-source MMO RPG demo](https://github.com/NetEase/pomelo/wiki/Introduction-to--Lord-of-Pomelo) (HTML5 client), which is a far better reference material than any book.
+* The reference materials and documentation are quite complete. In addition to the documentation, we also provide [an open-source MMO RPG demo](https://github.com/sex-pomelo/pomelo/wiki/Introduction-to--Lord-of-Pomelo) (HTML5 client), which is a far better reference material than any book.
 
 ## How can I develop with pomelo?
 With the following references, you can quickly familiarize yourself with the pomelo development process:
-* [Pomelo documents](https://github.com/NetEase/pomelo/wiki)
-* [Getting started](https://github.com/NetEase/pomelo/wiki/Welcome-to-Pomelo)
-* [Tutorial](https://github.com/NetEase/pomelo/wiki/Preface)
+* [Pomelo documents](https://github.com/sex-pomelo/pomelo/wiki)
+* [Getting started](https://github.com/sex-pomelo/pomelo/wiki/Welcome-to-Pomelo)
+* [Tutorial](https://github.com/sex-pomelo/pomelo/wiki/Preface)
 
 ## Gen jsdoc
 1. Install jsdoc ```npm install jsdoc -g```;
@@ -130,6 +130,6 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 [npm-url-pomelo]: https://github.com/sex-pomelo/sex-pomelo
 [npm-image-down]: https://img.shields.io/npm/dw/@sex-pomelo/sex-pomelo?label=down
 [Api]: https://shudingbo.github.io/sex-pomelo-doc/api/index.html
-[Wiki]: https://github.com/NetEase/pomelo/wiki
+[Wiki]: https://github.com/sex-pomelo/pomelo/wiki
 [egg-pomelo]: https://github.com/shudingbo/egg-pomelo
 [egg-pomelo-web]: https://github.com/shudingbo/egg-pomelo-web

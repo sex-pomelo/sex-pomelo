@@ -1,4 +1,16 @@
-2.3.0 /2021-11-26
+# 2.4.x / 2025-07-12
+
+* [x] update deps
+* [ ] typeing
+* [ ] i18n 组件规范化
+
+**Break change**
+
+* route string only support `[a-zA-Z0-9.]`
+
+
+
+# 2.3.0 /2021-11-26
 =================
 * Compatible ```Node 16```
 
@@ -40,7 +52,7 @@ dictionary.json
 ```
  * 保留 通过 ```useDict```，开启路由压缩功能
  * ```route```, 设置每类服务器需要压缩的路由
-   - key，服务类型，支持通用匹配 如果connector 和 gate 暴漏的路由一样，可以写成 "gate|connector"
+   - key，服务类型，支持通用匹配 如果connector 和 gate 暴露的路由一样，可以写成 "gate|connector"
    - val，需要压缩的路由数组
  * ```notify```,同原有通知路由
 
@@ -85,8 +97,8 @@ components: [
  * 在config.js 模式，使用内置组件，组件的名称需要按照格式 [ ```__<内置组件名字>__``` ]
 
 
-
-2.2.28 /2021-05-08
+# 2.x
+## 2.2.28 /2021-05-08
 =================
 * hybridsocket, add Get client real IP through X-Forwarded-For (Take only one).
 * Update `commander` dep.

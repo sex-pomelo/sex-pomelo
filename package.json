@@ -1,6 +1,6 @@
 {
   "name": "@sex-pomelo/sex-pomelo",
-  "version": "2.3.0",
+  "version": "2.4.x",
   "homepage": "https://github.com/sex-pomelo/sex-pomelo",
   "repository": {
     "type": "git",
@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "sh ./test.sh",
+    "test1": "mocha",
     "doc": "jsdoc -c ./jsdocconf.json"
   },
   "bugs": {
@@ -28,27 +29,25 @@
     "server"
   ],
   "dependencies": {
-    "@sex-pomelo/sex-pomelo-admin": "1.0.9",
-    "@sex-pomelo/sex-pomelo-logger": "0.1.14",
-    "@sex-pomelo/sex-pomelo-protocol": "^0.1.9",
-    "@sex-pomelo/sex-pomelo-rpc": "1.0.14",
-    "@sex-pomelo/sex-pomelo-scheduler": "0.4.5",
-    "clifflite": "^0.0.4",
-    "commander": "^7.x",
-    "mqtt": "^4.2.8",
-    "node-bignumber": "1.2.1",
+    "@sex-pomelo/sex-pomelo-admin": "1.0.10",
+    "@sex-pomelo/sex-pomelo-logger": "0.1.16",
+    "@sex-pomelo/sex-pomelo-protocol": "^1.0.0",
+    "@sex-pomelo/sex-pomelo-rpc": "1.0.15",
+    "@sex-pomelo/sex-pomelo-scheduler": "0.4.7",
+    "commander": "^14.0.0",
+    "mqtt": "^5.13.2",
+    "node-bignumber": "1.2.2",
     "pomelo-loader": "0.0.7",
     "pomelo-protobuf": "0.4.0",
-    "socket.io": "^4.4.0",
-    "ws": "^8.2.3"
+    "socket.io": "^4.8.1",
+    "ws": "^8.18.3"
   },
   "bin": {
     "pomelo": "./bin/pomelo"
   },
   "devDependencies": {
-    "@types/node": "^16.0.0",
-    "mocha": "^9.1.3",
-    "should": "^13.2.3",
-    "tui-jsdoc-template": "^1.2.2"
+    "@types/node": "^18.0.0",
+    "mocha": "^11.7.1",
+    "should": "^13.2.3"
   }
 }

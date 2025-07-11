@@ -7,7 +7,6 @@ const fs = require('fs'),
   os = require('os'),
   path = require('path'),
   util = require('util'),
-  cliff = require('clifflite'),
   co = require('../lib/modules/console'),
   utils = require('../lib/util/utils'),
   starter = require('../lib/master/starter'),
@@ -384,8 +383,17 @@ function list(opts) {
       }
       let servers = [];
       for(let key in data.msg) {
-        if(data.msg[key]){
-          servers.push(data.msg[key]);
+        let server = data.msg[key];
+        if(server){
+          servers.push({
+            serverId: server.serverId,
+            serverType: server.serverType,
+            pid: server.pid,
+            "rss(M)": Number(server.rss),
+            "heapTotal(M)": Number(server.heapTotal),
+            "heapUsed(M)": Number(server.heapUsed),
+            "uptime(m)": Number(server.uptime)
+          });
         }
       }
       let comparer = function(a, b) {
@@ -402,12 +410,7 @@ function list(opts) {
         }
       };
       servers.sort(comparer);
-      let rows = [];
-      rows.push(['serverId', 'serverType', 'pid', 'rss(M)', 'heapTotal(M)', 'heapUsed(M)', 'uptime(m)']);
-      servers.forEach(function(server) {
-        rows.push([server.serverId, server.serverType, server.pid, server.rss, server.heapTotal, server.heapUsed, server.uptime]);
-      });
-      console.info(cliff.stringifyRows(rows, ['red', 'blue', 'green', 'cyan', 'magenta', 'white', 'yellow']));
+      console.table( servers)
       process.exit(0);
     });
   });
