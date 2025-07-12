@@ -1,10 +1,12 @@
 'use strict';
 
+const { EventEmitter } = require( 'events' );
+
 
 /**
  * BaseGameHandler is a base class that can be extended.
  */
-class BaseGameHandler {
+class BaseGameHandler extends EventEmitter {
 
   /**
    * 
