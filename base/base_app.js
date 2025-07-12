@@ -4,9 +4,7 @@ const logger = require('@sex-pomelo/sex-pomelo-logger').getLogger('pomelo');
 const fs= require('fs');
 const path = require('path');
 
-/**
- * @typedef {import('../lib/application').Application} Application
- */
+
 /** PluginCfg
   * @typedef {Object} PluginCfg
   * @property {string} package - plugin require path
@@ -24,15 +22,17 @@ const path = require('path');
 
 
 /**
+ * @class
  * BaseApp is a base class that can be extended.
  */
 class BaseApp {
 
   constructor( pomelo ){
 
+    /** @type {import('../types/index')} */
     this.pomelo = pomelo;
 
-    /** @type {Application} */
+    /** @type {import('../types/index').Application} */
     this.app = pomelo.createApp();
 
     /** Server ID 
@@ -409,4 +409,4 @@ let contains = function(str, settings) {
   return exclude?(ts.indexOf(str) === -1) : (ts.indexOf(str) !== -1);
 };
 
-module.exports = BaseApp;
+module.exports = { BaseApp };

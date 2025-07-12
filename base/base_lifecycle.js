@@ -1,8 +1,6 @@
 'use strict';
 
-/**
- * @typedef {import('../lib/application').Application} Application
- */
+
 
 /**
  * Interface for classes that LifeCycle
@@ -15,7 +13,7 @@
  *
  * @function
  * @name LifeCycle#beforeStartup
- * @param {Application} app 
+ * @param {import('../types/index').Application} app 
  * @param {Function} cb 
  */
 
@@ -24,7 +22,7 @@
  *
  * @function
  * @name LifeCycle#afterStartup
- * @param {Application} app 
+ * @param {import('../types/index').Application} app 
  * @param {Function} cb 
  */
 
@@ -33,7 +31,7 @@
  *
  * @function
  * @name LifeCycle#beforeShutdown
- * @param {Application} app 
+ * @param {import('../types/index').Application} app 
  * @param {Function} cb 
  */
 
@@ -42,7 +40,7 @@
  *
  * @function
  * @name LifeCycle#afterStartAll
- * @param {Application} app 
+ * @param {import('../types/index').Application} app 
  * @param {Function} cb 
  */
 
@@ -55,7 +53,7 @@
 class BaseLifecycle {
 
   /** lifeCycle Before Startup
-   * @param {Application} app 
+   * @param {import('../types/index').Application} app 
    * @param {Function} cb 
    */
   static beforeStartup (app, cb) {
@@ -64,7 +62,7 @@ class BaseLifecycle {
   }
   
   /** lifeCycle After Startup
-   * @param {Application} app 
+   * @param {import('../types/index').Application} app 
    * @param {Function} cb 
    */
   static afterStartup (app, cb) {
@@ -73,7 +71,7 @@ class BaseLifecycle {
   }
   
   /** lifeCycle Before Shutdown
-   * @param {Application} app 
+   * @param {import('../types/index').Application} app 
    * @param {Function} cb 
    */
   static beforeShutdown(app, cb) {
@@ -82,7 +80,7 @@ class BaseLifecycle {
   }
   
   /** lifeCycle After Shutdown
-   * @param {Application} app 
+   * @param {import('../types/index').Application} app 
    * @param {Function} cb 
    */
   static afterStartAll(app) {

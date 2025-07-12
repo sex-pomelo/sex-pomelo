@@ -1,8 +1,5 @@
 'use strict';
 
-/**
- * @typedef {import('../lib/application').Application} Application
- */
 
  /**
  * Interface for classes that Component
@@ -48,10 +45,11 @@ class BaseComponent {
 
   /** constructor BaseComponent
    * 
-   * @param {Application} app current application context
+   * @param {import('../types/index').Application} app current application context
    * @param {object} opts component opts
    */
   constructor(app,opts){
+	/** @type {import('../types/index').Application} */
     this.app = app;
   }
 
@@ -84,4 +82,4 @@ class BaseComponent {
 	}
 }
 
-module.exports = BaseComponent;
+module.exports = { BaseComponent };

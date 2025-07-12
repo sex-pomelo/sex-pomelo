@@ -1,8 +1,5 @@
 'use strict';
 
-/**
- * @typedef {import('../lib/application').Application} Application
- */
 
 /**
  * BaseGameHandler is a base class that can be extended.
@@ -11,11 +8,13 @@ class BaseGameHandler {
 
   /**
    * 
-   * @param {Application} app 
+   * @param {import('../types/index').Application} app - pomelo application instance
    */
   constructor(app){
+
+    /** @type {import('../types/index').Application} */
     this.app = app;
   }
 }
 
-module.exports = BaseGameHandler;
+module.exports = { BaseGameHandler };
