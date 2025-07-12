@@ -1,0 +1,12 @@
+# .vscode/i18n-ally-custom-framework.yml
+
+languageIds:
+  - javascript
+  - javascriptreact
+
+usageMatchRegex:
+  - "[^\\w\\d]tr\\s*\\([\\s]*['\"`]({key})['\"`]"
+  - "[^\\w\\d]tr1\\s*\\([\\s]*[^,]*,[\\s]*['\"`]({key})['\"`]"
+scopeRangeRegex: "useTranslation\\(\\s*\\[?\\s*['\"`](.*?)['\"`]"
+
+monopoly: true

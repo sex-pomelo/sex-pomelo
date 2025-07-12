@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Pure JS",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/app.js",
+            "args": ["app.js", "env=development", "id=connector-server-1", "host=127.0.0.1", "port=3150", "serverType=connector"],
+        }
+    ]
+}

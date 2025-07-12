@@ -1,0 +1,8 @@
+{
+
+  "i18n-ally.localesPaths": [ "app/locale" ],
+  "i18n-ally.sourceLanguage": "en-US",
+  "i18n-ally.keystyle": "flat",
+  "i18n-ally.enabledParsers": [ "js" ],
+  "i18n-ally.supportedLanguages": [ "en-US", "zh-CN" ]
+}

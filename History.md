@@ -1,12 +1,44 @@
 # 2.4.x / 2025-07-12
 
 * [x] update deps
+* [x] i18n 组件规范化，
 * [ ] typeing
-* [ ] i18n 组件规范化
+
+
+
 
 **Break change**
 
 * route string only support `[a-zA-Z0-9.]`
+
+## i18n 支持 i18n-ally 扩展
+
+1. change `.vscode/settings.json`
+   ``` json
+   {
+	"i18n-ally.localesPaths": [ "app/locale" ],
+	"i18n-ally.sourceLanguage": "en-US",
+	"i18n-ally.keystyle": "flat",
+	"i18n-ally.enabledParsers": [ "js" ],
+	"i18n-ally.supportedLanguages": [ "zh-CN", "es-US" ]
+   }
+   ```
+1. 增加文件 `.vscode/i18n-ally-custom-framework.yml`
+   ```yml
+	# .vscode/i18n-ally-custom-framework.yml
+
+	languageIds:
+	  - javascript
+	  - javascriptreact
+
+	usageMatchRegex:
+	  - "[^\\w\\d]tr\\s*\\([\\s]*['\"`]({key})['\"`]"
+	  - "[^\\w\\d]tr1\\s*\\([\\s]*[^,]*,[\\s]*['\"`]({key})['\"`]"
+
+	scopeRangeRegex: "useTranslation\\(\\s*\\[?\\s*['\"`](.*?)['\"`]"
+
+	monopoly: true
+   ```
 
 
 
