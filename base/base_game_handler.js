@@ -13,7 +13,8 @@ class BaseGameHandler extends EventEmitter {
    * @param {import('../types/index').Application} app - pomelo application instance
    */
   constructor(app){
-
+    super();
+    
     /** @type {import('../types/index').Application} */
     this.app = app;
   }

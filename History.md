@@ -1,11 +1,13 @@
-# 2.4.x / 2025-07-12
+# 2.4.1 / 2025-07-14
+
+* [x] fix `BaseGameHandler` constructor error;
+* [x] fix monitor, server comp extern error;
+
+# 2.4.0 / 2025-07-12
 
 * [x] update deps
 * [x] i18n 组件规范化，
-* [ ] typeing
-
-
-
+* [x] typeing
 
 **Break change**
 
@@ -166,7 +168,7 @@ components: [
   - Routing dynamic loading, [ **only load new serverType and route function** ].
 ``` js
 const pomelo = require('@sex-pomelo/sex-pomelo');
-const BaseApp = require('@sex-pomelo/sex-pomelo/base').BaseApp;
+const { BaseApp } = require('@sex-pomelo/sex-pomelo/base');
 
 
 class MyApp extends BaseApp{
