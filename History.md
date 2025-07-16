@@ -1,3 +1,7 @@
+# 2.4.2 / 2025-07-16
+
+* [x] optimize logger info filename length;
+
 # 2.4.1 / 2025-07-14
 
 * [x] fix `BaseGameHandler` constructor error;

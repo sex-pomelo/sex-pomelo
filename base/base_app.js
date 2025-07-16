@@ -1,6 +1,7 @@
 'use strict';
 
-const logger = require('@sex-pomelo/sex-pomelo-logger').getLogger('pomelo');
+const reFilename = __filename.substring(__filename.indexOf("node_modules"))
+const logger = require('@sex-pomelo/sex-pomelo-logger').getLogger('pomelo', reFilename);
 const fs= require('fs');
 const path = require('path');
 
